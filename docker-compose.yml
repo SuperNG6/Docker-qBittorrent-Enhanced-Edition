@@ -9,7 +9,7 @@ services:
       - TZ=Asia/Shanghai
     volumes:
       - /path/to/appdata/config:/config
-      - /path/to/downloads:/Downloads
+      - /path/to/downloads:/downloads
     ports:
       - 6881:6881
       - 6881:6881/udp

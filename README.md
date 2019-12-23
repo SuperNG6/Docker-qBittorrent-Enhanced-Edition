@@ -35,7 +35,7 @@ docker create  \
     -p 6881:6881/udp  \
     -p 8989:8989  \
     -v /配置文件位置:/config  \
-    -v /下载位置:/Downloads  \
+    -v /下载位置:/downloads  \
     --restart unless-stopped  \
     johngong/qbittorrent:latest
 ````
@@ -69,7 +69,7 @@ services:
       - TZ=Asia/Shanghai
     volumes:
       - /path/to/appdata/config:/config
-      - /path/to/downloads:/Downloads
+      - /path/to/downloads:/downloads
     ports:
       - 6881:6881
       - 6881:6881/udp
@@ -88,7 +88,7 @@ services:
 | `-p 6881:6881` |BT下载监听端口|
 | `-p 6881:6881/udp` |BT下载DHT监听端口
 | `-v /配置文件位置:/config` |qBittorrent配置文件位置|
-| `-v /下载位置:/Downloads` |qBittorrent下载位置|
+| `-v /下载位置:/downloads` |qBittorrent下载位置|
 | `-e WEBUIPORT=8989` |web访问端口环境变量|
 | `-e TZ=Asia/Shanghai` |系统时区设置,默认为Asia/Shanghai|
 
@@ -98,7 +98,7 @@ services:
 
 |参数|说明|
 |-|:-|
-| `本地文件夹1:/Downloads` |qBittorrent下载位置|
+| `本地文件夹1:/downloads` |qBittorrent下载位置|
 | `本地文件夹2:/config` |qBittorrent配置文件位置|
 
 2. 端口

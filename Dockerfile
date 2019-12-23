@@ -43,6 +43,6 @@ RUN  apk add --no-cache ca-certificates tzdata python3 \
 &&   chmod a+x  /usr/local/bin/qbittorrent-nox  
 
 
-VOLUME /Downloads /config
+VOLUME /downloads /config
 EXPOSE 8989  6881  6881/udp
 ENTRYPOINT [ "/init" ]
