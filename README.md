@@ -3,6 +3,7 @@
 ### 感谢以下项目:
 https://github.com/gshang2017/docker
 本项目基于gshang2017的Docker-qBittorrent-Enhanced-Edition)，稍作修改增加了权限管理，使用自己的账户权限运行，自用
+
 [https://github.com/qbittorrent/qBittorrent](https://github.com/qbittorrent/qBittorrent)   
 [https://github.com/c0re100/qBittorrent-Enhanced-Edition](https://github.com/c0re100/qBittorrent-Enhanced-Edition)    
 [https://github.com/ngosang/trackerslist]( https://github.com/ngosang/trackerslist)
