@@ -1,9 +1,12 @@
 ## 群晖nas自用：
 
-### 感谢以下项目:
-https://github.com/gshang2017/docker
-本项目基于gshang2017的Docker-qBittorrent-Enhanced-Edition)，稍作修改增加了权限管理，使用自己的账户权限运行，自用
+本项目基于gshang2017的Docker-qBittorrent-Enhanced-Edition，稍作修改增加了权限管理，以便于使用自己的账户权限运行，自用。
 
+[https://hub.docker.com/repository/docker/superng6/qbittorrentee](https://hub.docker.com/repository/docker/superng6/qbittorrentee)
+
+### 感谢以下项目:
+
+[https://github.com/gshang2017/docker](https://github.com/gshang2017/docker)
 [https://github.com/qbittorrent/qBittorrent](https://github.com/qbittorrent/qBittorrent)   
 [https://github.com/c0re100/qBittorrent-Enhanced-Edition](https://github.com/c0re100/qBittorrent-Enhanced-Edition)    
 [https://github.com/ngosang/trackerslist]( https://github.com/ngosang/trackerslist)
@@ -126,3 +129,4 @@ services:
 ### 其它:
 
 1. Trackers只有一个工作,新增的Trackers显示还未联系，需在qBittorrent.conf里[Preferences]下增加Advanced\AnnounceToAllTrackers=true。可以参照我这篇博客操作https://sleele.com/2019/05/25/qbittorrent添加trackers后显示未联系
+![](https://github.com/SuperNG6/pic/blob/master/issues/Xnip2019-12-23_20-39-50.png)
