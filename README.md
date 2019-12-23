@@ -2,7 +2,7 @@
 
 ### 感谢以下项目:
 https://github.com/gshang2017/docker
-本项目基于gshang2017，稍作修改增加了权限管理，自用
+本项目基于gshang2017的Docker-qBittorrent-Enhanced-Edition)，稍作修改增加了权限管理，使用自己的账户权限运行，自用
 [https://github.com/qbittorrent/qBittorrent](https://github.com/qbittorrent/qBittorrent)   
 [https://github.com/c0re100/qBittorrent-Enhanced-Edition](https://github.com/c0re100/qBittorrent-Enhanced-Edition)    
 [https://github.com/ngosang/trackerslist]( https://github.com/ngosang/trackerslist)
@@ -11,10 +11,8 @@ https://github.com/gshang2017/docker
   
 |名称|版本|说明|
 |:-|:-|:-|
-|qBittorrent|4.2.1|原版 (amd64) 集成Trackers自动更新|
-|qBittorrent|4.2.1_arm64v8|原版 (arm64v8) 集成Trackers自动更新|
-|qBittorrent|qee_4.2.1.10|增强版 (amd64) 集成Trackers自动更新|
-|qBittorrent|qee_4.2.1.10_arm64v8|增强版 (arm64v8) 集成Trackers自动更新|
+|qBittorrent|qee_4.2.1.10|增强版 (amd64)|
+
 
 ### 注意：
 
@@ -22,19 +20,11 @@ https://github.com/gshang2017/docker
 
 ### docker命令行设置：
 
-1. 下载镜像
 
-|版本|命令|
-|-|:-|
-|原版|docker pull johngong/qbittorrent:latest|
-|原版arm64v8版|docker pull johngong/qbittorrent:4.2.1_arm64v8|
-|qee版|docker pull johngong/qbittorrent:qee_4.2.1.10|
-|qee_arm64v8版|docker pull johngong/qbittorrent:qee_4.2.1.10_arm64v8|
-
-2. 创建qbittorrent容器
+1. 创建qbittorrent容器
 
         docker create  \
-           --name=qbittorrent  \
+           --name=qbittorrentee  \
            -e WEBUIPORT=8989  \
            -p 6881:6881  \
            -p 6881:6881/udp  \
@@ -45,34 +35,33 @@ https://github.com/gshang2017/docker
            johngong/qbittorrent:latest
 
 
-3. 运行
+2. 运行
 
-       docker start qbittorrent
+       docker start qbittorrentee
 
-4. 停止
+3. 停止
 
-       docker stop qbittorrent
+       docker stop qbittorrentee
 
-5. 删除容器
+4. 删除容器
 
-       docker rm  qbittorrent
+       docker rm qbittorrentee
 
-6. 删除镜像
+5. 删除镜像
 
-       docker image rm  johngong/qbittorrent:latest
+       docker image rm superng6/qbittorrentee:latest
 
 ### 变量:
 
 |参数|说明|
 |-|:-|
-| `--name=qbittorrent` |容器名|
+| `--name=qbittorrentee` |容器名|
 | `-p 8989:8989` |web访问端口 [IP:8989](IP:8989);(默认用户名:admin;默认密码:adminadmin);此端口需与容器端口和环境变量保持一致，否则无法访问|
 | `-p 6881:6881` |BT下载监听端口|
 | `-p 6881:6881/udp` |BT下载DHT监听端口
 | `-v /配置文件位置:/config` |qBittorrent配置文件位置|
 | `-v /下载位置:/Downloads` |qBittorrent下载位置|
 | `-e WEBUIPORT=8989` |web访问端口环境变量|
-| `-e TRACKERSAUTO=YES` |自动更新qBittorrent的trackers,默认开启此功能|
 | `-e TZ=Asia/Shanghai` |系统时区设置,默认为Asia/Shanghai|
 
 ### 群晖docker设置：
@@ -96,7 +85,6 @@ https://github.com/gshang2017/docker
 
 |参数|说明|
 |-|:-|
-| `TRACKERSAUTO=YES` |自动更新qBittorrent的trackers,默认开启此功能|
 | `TZ=Asia/Shanghai` |系统时区设置,默认为Asia/Shanghai|
 | `WEBUIPORT=8989` |web访问端口环境变量|
 
