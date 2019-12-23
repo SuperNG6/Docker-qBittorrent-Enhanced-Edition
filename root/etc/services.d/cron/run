@@ -1,5 +1,0 @@
-#! /usr/bin/with-contenv bash
-
-#启动trackers更新任务
-exec \
-	s6-setuidgid abc crond -f -L /dev/null

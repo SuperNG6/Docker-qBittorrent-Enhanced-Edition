@@ -31,7 +31,6 @@ RUN  apk add --no-cache ca-certificates make g++ gcc qt5-qtsvg-dev boost-dev qt5
 
 FROM lsiobase/alpine:3.10
 
-ENV TRACKERSAUTO=YES
 ENV TZ=Asia/Shanghai
 ENV WEBUIPORT=8989
 
@@ -39,9 +38,8 @@ COPY root /
 COPY --from=compilingqB  /qbittorrent  /
 
 # install curl caddy tzdata python3
-RUN  apk add --no-cache curl ca-certificates  tzdata  python3 \
+RUN  apk add --no-cache ca-certificates tzdata python3 \
 &&   rm -rf /var/cache/apk/*   \
-&&   chmod a+x  /usr/local/qbittorrent/updatetrackers.sh  \
 &&   chmod a+x  /usr/local/bin/qbittorrent-nox  
 
 
