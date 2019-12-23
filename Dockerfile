@@ -1,6 +1,6 @@
 FROM lsiobase/alpine:3.10 as compilingqB
 
-#compiling qB
+# compiling qB
 
 ARG  LIBTORRENT_VER=1.2.3
 ARG  QBITTORRENT_VER=4.2.1.10
@@ -13,7 +13,7 @@ RUN  apk add --no-cache ca-certificates make g++ gcc qt5-qtsvg-dev boost-dev qt5
 &&   cd  /qbtorrent/libtorrent-rasterbar-${LIBTORRENT_VER} \
 &&   ./configure  --host=x86_64-alpine-linux-musl \
 &&   make install-strip \
-#qBittorrent-Enhanced-Edition
+# qBittorrent-Enhanced-Edition
 &&   wget  -P /qbtorrent https://github.com/c0re100/qBittorrent-Enhanced-Edition/archive/release-${QBITTORRENT_VER}.zip   \
 &&   unzip   /qbtorrent/release-${QBITTORRENT_VER}.zip  -d    /qbtorrent \
 &&   cd  /qbtorrent/qBittorrent-Enhanced-Edition-release-${QBITTORRENT_VER} \
