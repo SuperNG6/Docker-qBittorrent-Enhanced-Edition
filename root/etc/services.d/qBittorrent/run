@@ -1,0 +1,4 @@
+#! /usr/bin/with-contenv bash
+
+# 启动qBittorrent
+exec qbittorrent-nox --webui-port=$WEBUIPORT   --profile=/config 
