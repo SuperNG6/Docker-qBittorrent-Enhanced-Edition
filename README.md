@@ -23,17 +23,18 @@ https://github.com/gshang2017/docker
 
 1. 创建qbittorrent容器
 
-        docker create  \
-           --name=qbittorrentee  \
-           -e WEBUIPORT=8989  \
-           -p 6881:6881  \
-           -p 6881:6881/udp  \
-           -p 8989:8989  \
-           -v /配置文件位置:/config  \
-           -v /下载位置:/Downloads  \
-           --restart unless-stopped  \
-           johngong/qbittorrent:latest
-
+````
+docker create  \
+    --name=qbittorrentee  \
+    -e WEBUIPORT=8989  \
+    -p 6881:6881  \
+    -p 6881:6881/udp  \
+    -p 8989:8989  \
+    -v /配置文件位置:/config  \
+    -v /下载位置:/Downloads  \
+    --restart unless-stopped  \
+    johngong/qbittorrent:latest
+````
 
 2. 运行
 
@@ -52,8 +53,25 @@ https://github.com/gshang2017/docker
        docker image rm superng6/qbittorrentee:latest
 
 ### docker-compose
-
-
+````
+version: "2"
+services:
+  aria2:
+    image: superng6/qbittorrentee
+    container_name: qbittorrentee
+    environment:
+      - PUID=1026
+      - PGID=100
+      - TZ=Asia/Shanghai
+    volumes:
+      - /path/to/appdata/config:/config
+      - /path/to/downloads:/Downloads
+    ports:
+      - 6881:6881
+      - 6881:6881/udp
+      - 8989:8989
+    restart: unless-stopped
+````
 
 
 
