@@ -21,6 +21,12 @@ else
 echo trackers更新任务已存在。
 fi
 
+chown -R abc:abc \
+    /root \
+    /usr \
+	/config \
+    /Downloads
+
 #启动时更新trackers。
 if [ "$TRACKERSAUTO" == "YES" ];then
 /usr/local/qbittorrent/updatetrackers.sh
