@@ -51,6 +51,12 @@ https://github.com/gshang2017/docker
 
        docker image rm superng6/qbittorrentee:latest
 
+### docker-compose
+
+
+
+
+
 ### 变量:
 
 |参数|说明|
@@ -100,4 +106,4 @@ https://github.com/gshang2017/docker
 
 ### 其它:
 
-1. Trackers只有一个工作,新增的Trackers显示还未联系，需在qBittorrent.conf里[Preferences]下增加Advanced\AnnounceToAllTrackers=true。
+1. Trackers只有一个工作,新增的Trackers显示还未联系，需在qBittorrent.conf里[Preferences]下增加Advanced\AnnounceToAllTrackers=true。可以参照我这篇博客操作https://sleele.com/2019/05/25/qbittorrent添加trackers后显示未联系
