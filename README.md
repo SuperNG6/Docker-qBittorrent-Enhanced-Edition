@@ -6,7 +6,7 @@
 
 ### 感谢以下项目:
 
-[https://github.com/gshang2017/docker](https://github.com/gshang2017/docker)
+[https://github.com/gshang2017/docker/tree/master/qBittorrent](https://github.com/gshang2017/docker/tree/master/qBittorrent)   
 [https://github.com/qbittorrent/qBittorrent](https://github.com/qbittorrent/qBittorrent)   
 [https://github.com/c0re100/qBittorrent-Enhanced-Edition](https://github.com/c0re100/qBittorrent-Enhanced-Edition)    
 [https://github.com/ngosang/trackerslist]( https://github.com/ngosang/trackerslist)
