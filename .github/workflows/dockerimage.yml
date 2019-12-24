@@ -9,6 +9,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: superng6
+    - uses: actions/checkout@master
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag superng6/qbittorrentee:latest --force-rm
