@@ -2,4 +2,4 @@
 
 # 启动qBittorrent
 exec \
-	s6-setuidgid abc qbittorrent-nox --webui-port=$WEBUIPORT   --profile=/config 
+	s6-setuidgid abc qbittorrent-nox --webui-port=$WEBUIPORT --profile=/config 
