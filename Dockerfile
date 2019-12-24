@@ -19,7 +19,7 @@ RUN  apk add --no-cache ca-certificates make g++ gcc qt5-qtsvg-dev boost-dev qt5
 &&   wget  -P /qbtorrent https://github.com/c0re100/qBittorrent-Enhanced-Edition/archive/release-${QBITTORRENT_VER}.zip   \
 &&   unzip   /qbtorrent/release-${QBITTORRENT_VER}.zip  -d    /qbtorrent \
 &&   cd  /qbtorrent/qBittorrent-Enhanced-Edition-release-${QBITTORRENT_VER} \
-#
+# make install
 &&   ./configure   --disable-gui --host=x86_64-alpine-linux-musl \
 &&   make install \
 &&   ldd /usr/local/bin/qbittorrent-nox   |cut -d ">" -f 2|grep lib|cut -d "(" -f 1|xargs tar -chvf /qbtorrent/qbittorrent.tar  \
@@ -28,7 +28,7 @@ RUN  apk add --no-cache ca-certificates make g++ gcc qt5-qtsvg-dev boost-dev qt5
 &&   cp --parents /usr/local/bin/qbittorrent-nox  /qbittorrent
  
 
- # docker qB
+# docker qBittorrent-Enhanced-Edition
 
 FROM lsiobase/alpine:3.10
 
@@ -40,7 +40,7 @@ ENV WEBUIPORT=8989
 COPY root /
 COPY --from=compilingqB  /qbittorrent  /
 
-# install curl tzdata python3
+# install ca-certificates tzdata python3
 RUN  apk add --no-cache ca-certificates tzdata python3 \
 &&   rm -rf /var/cache/apk/*   \
 &&   chmod a+x  /usr/local/bin/qbittorrent-nox  
