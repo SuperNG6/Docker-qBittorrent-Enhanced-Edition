@@ -30,15 +30,14 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: Build image
-        run: docker build . --file Dockerfile --tag image
-
       - name: Log into registry
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
-          name: myDocker/repository
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build image
+        run: docker build . --file Dockerfile --tag image
         
       - name: Push image
         run: |
