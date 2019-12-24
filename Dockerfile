@@ -30,12 +30,13 @@ RUN  apk add --no-cache ca-certificates make g++ gcc qt5-qtsvg-dev boost-dev qt5
 
  # docker qB
 
-
 FROM lsiobase/alpine:3.10
 
+# environment settings
 ENV TZ=Asia/Shanghai
 ENV WEBUIPORT=8989
 
+# add local files and install qbitorrent
 COPY root /
 COPY --from=compilingqB  /qbittorrent  /
 
@@ -44,7 +45,6 @@ RUN  apk add --no-cache ca-certificates tzdata python3 \
 &&   rm -rf /var/cache/apk/*   \
 &&   chmod a+x  /usr/local/bin/qbittorrent-nox  
 
-
+# ports and volumes
 VOLUME /downloads /config
 EXPOSE 8989  6881  6881/udp
-ENTRYPOINT [ "/init" ]
