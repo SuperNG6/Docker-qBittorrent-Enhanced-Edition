@@ -2,7 +2,7 @@
 
 本项目基于gshang2017的Docker-qBittorrent-Enhanced-Edition，稍作修改增加了权限管理，以便于使用自己的账户权限运行，自用。
 
-[https://hub.docker.com/repository/docker/superng6/qbittorrentee](https://hub.docker.com/repository/docker/superng6/qbittorrentee)
+[https://hub.docker.com/r/superng6/qbittorrentee](https://hub.docker.com/r/superng6/qbittorrentee)
 
 ### 感谢以下项目:
 
