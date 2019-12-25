@@ -30,10 +30,10 @@
 ````
 docker create  \
     --name=qbittorrentee  \
-    -e WEBUIPORT=8989  \
+    -e WEBUIPORT=8080  \
     -p 6881:6881  \
     -p 6881:6881/udp  \
-    -p 8989:8989  \
+    -p 8080:8080  \
     -v /配置文件位置:/config  \
     -v /下载位置:/downloads  \
     --restart unless-stopped  \
@@ -73,7 +73,7 @@ services:
     ports:
       - 6881:6881
       - 6881:6881/udp
-      - 8989:8989
+      - 8080:8080
     restart: unless-stopped
 ````
 
@@ -84,12 +84,12 @@ services:
 |参数|说明|
 |-|:-|
 | `--name=qbittorrentee` |容器名|
-| `-p 8989:8989` |web访问端口 [IP:8989](IP:8989);(默认用户名:admin;默认密码:adminadmin);此端口需与容器端口和环境变量保持一致，否则无法访问|
+| `-p 8080:8080` |web访问端口 [IP:8080](IP:8080);(默认用户名:admin;默认密码:adminadmin);此端口需与容器端口和环境变量保持一致，否则无法访问|
 | `-p 6881:6881` |BT下载监听端口|
 | `-p 6881:6881/udp` |BT下载DHT监听端口
 | `-v /配置文件位置:/config` |qBittorrent配置文件位置|
 | `-v /下载位置:/downloads` |qBittorrent下载位置|
-| `-e WEBUIPORT=8989` |web访问端口环境变量|
+| `-e WEBUIPORT=8080` |web访问端口环境变量|
 | `-e TZ=Asia/Shanghai` |系统时区设置,默认为Asia/Shanghai|
 
 ### 群晖docker设置：
@@ -107,14 +107,14 @@ services:
 |-|:-|
 | `本地端口1:6881` |BT下载监听端口|
 | `本地端口2:6881/udp` |BT下载DHT监听端口|
-| `本地端口3:8989` |web访问端口 [IP:8989](IP:8989);(默认用户名:admin;默认密码:adminadmin);此端口需与容器端口和环境变量保持一致，否则无法访问|
+| `本地端口3:8080` |web访问端口 [IP:8080](IP:8080);(默认用户名:admin;默认密码:adminadmin);此端口需与容器端口和环境变量保持一致，否则无法访问|
 
 3. 环境变量：
 
 |参数|说明|
 |-|:-|
 | `TZ=Asia/Shanghai` |系统时区设置,默认为Asia/Shanghai|
-| `WEBUIPORT=8989` |web访问端口环境变量|
+| `WEBUIPORT=8080` |web访问端口环境变量|
 
 ### 搜索：
 
