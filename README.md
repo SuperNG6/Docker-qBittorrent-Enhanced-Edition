@@ -31,6 +31,9 @@
 docker create  \
     --name=qbittorrentee  \
     -e WEBUIPORT=8080  \
+    -e PUID=1026
+    -e PGID=100
+    -e TZ=Asia/Shanghai
     -p 6881:6881  \
     -p 6881:6881/udp  \
     -p 8080:8080  \
