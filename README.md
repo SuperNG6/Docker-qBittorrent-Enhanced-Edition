@@ -40,7 +40,7 @@ docker create  \
     -v /配置文件位置:/config  \
     -v /下载位置:/downloads  \
     --restart unless-stopped  \
-    johngong/qbittorrent:latest
+    superng6/qbittorrent:latest
 ````
 
 2. 运行
