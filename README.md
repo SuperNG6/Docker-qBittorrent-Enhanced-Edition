@@ -11,13 +11,27 @@
 [https://github.com/c0re100/qBittorrent-Enhanced-Edition](https://github.com/c0re100/qBittorrent-Enhanced-Edition)    
 [https://github.com/ngosang/trackerslist]( https://github.com/ngosang/trackerslist)
 
+
+# 本镜像的一些优点
+- 做了usermapping，使用你自己的账户权限来运行，这点对于群辉来说尤其重要
+- qBittorrent-Enhanced-Edition，没有包含多于的服务
+- 默认上海时区 Asia/Shanghai
+- qBittorrent-Enhanced-Edition屏蔽吸血客户端
+- 内置优化过的conf文件，减少手工设置
+- 默认中文
+
 ### 版本：
-  
-|名称|版本|说明|
-|:-|:-|:-|
-|qBittorrent|qee_4.1.9.15|增强版 (amd64)|
 
+## qBittorrent-Enhanced-Edition 4.1.9.15
 
+# Changelogs
+## 2020/01/06
+
+      1、修改conf，优化参数，减少手动设置
+      2、自动下载并更新tracker list
+      3、默认中文
+      4、基于qBittorrent-Enhanced-Edition 4.1.9.15 最新版的SSL有问题
+      
 ### 注意：
 
 1. qBittorrent-Enhanced-Edition 增强版 需下载对应版本ipfilter.dat放入qBittorrent配置文件夹才能屏蔽离线下载 [https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases](https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases)
@@ -27,8 +41,6 @@
 群晖用户请使用你当前的用户SSH进系统，输入 ``id 你的用户id`` 获取到你的UID和GID并输入进去
 
 ![](https://github.com/SuperNG6/pic/blob/master/baidupcs/Xnip2019-12-19_17-18-20.png)
-![](https://github.com/SuperNG6/pic/blob/master/baidupcs/Xnip2019-12-19_17-18-11.png)
-![](https://github.com/SuperNG6/pic/blob/master/baidupcs/Xnip2019-12-19_17-23-27.png)
 
 ### 权限管理设置
 对你的``docker配置文件夹的根目录``进行如图操作，``你的下载文件夹的根目录``进行相似操作，去掉``管理``这个权限，只给``写入``,``读取``权限
@@ -54,22 +66,6 @@ docker create  \
     --restart unless-stopped  \
     superng6/qbittorrent:latest
 ````
-
-2. 运行
-
-       docker start qbittorrentee
-
-3. 停止
-
-       docker stop qbittorrentee
-
-4. 删除容器
-
-       docker rm qbittorrentee
-
-5. 删除镜像
-
-       docker image rm superng6/qbittorrentee:latest
 
 ### docker-compose
 ````
@@ -141,7 +137,3 @@ services:
 3. 一些搜索插件网站需过墙才能用
 4. jackett搜索插件需配置jackett.json(位置config/qBittorrent/data/nova3/engines)，插件需配合jackett服务的api_key。可自行搭建docker版jackett(例如linuxserver/jackett)。
 
-### 其它:
-
-1. Trackers只有一个工作,新增的Trackers显示还未联系，需在qBittorrent.conf里[Preferences]下增加Advanced\AnnounceToAllTrackers=true。可以参照我这篇博客操作https://sleele.com/2019/05/25/qbittorrent添加trackers后显示未联系
-![](https://github.com/SuperNG6/pic/blob/master/issues/Xnip2019-12-23_20-39-50.png)
