@@ -22,6 +22,18 @@
 
 1. qBittorrent-Enhanced-Edition 增强版 需下载对应版本ipfilter.dat放入qBittorrent配置文件夹才能屏蔽离线下载 [https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases](https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases)
 
+## 关于群晖
+
+群晖用户请使用你当前的用户SSH进系统，输入 ``id 你的用户id`` 获取到你的UID和GID并输入进去
+
+![](https://github.com/SuperNG6/pic/blob/master/baidupcs/Xnip2019-12-19_17-18-20.png)
+![](https://github.com/SuperNG6/pic/blob/master/baidupcs/Xnip2019-12-19_17-18-11.png)
+![](https://github.com/SuperNG6/pic/blob/master/baidupcs/Xnip2019-12-19_17-23-27.png)
+
+### 权限管理设置
+对你的``docker配置文件夹的根目录``进行如图操作，``你的下载文件夹的根目录``进行相似操作，去掉``管理``这个权限，只给``写入``,``读取``权限
+![](https://github.com/SuperNG6/pic/blob/master/aria2/Xnip2019-12-07_10-35-24.png)
+
 ### docker命令行设置：
 
 
