@@ -1,15 +1,14 @@
 name: Publish Docker
-on: 
+on:
   release:
     types: [published]
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
     - name: Publish to Registry
-      uses: HurricanKai/Publish-Docker-Github-Action@master
+      uses: elgohr/Publish-Docker-Github-Action@master
       with:
         name: superng6/qbittorrentee
         username: ${{ secrets.DOCKER_USERNAME }}
