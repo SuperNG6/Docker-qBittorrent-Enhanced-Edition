@@ -1,0 +1,20 @@
+name: Build Amd64 Image
+on:
+  release:
+    types: [published]
+jobs:
+  build:
+      runs-on: ubuntu-latest
+      name: Build image job
+      steps:
+          - name: Checkout master
+            uses: actions/checkout@master
+          - name: Build and publish image
+            uses: ilteoood/docker_buildx@master
+            with:
+              publish: true
+              imageName: superng6/qbittorrentee
+              platform: linux/amd64
+              tag: latest
+              dockerHubUser: ${{ secrets.DOCKER_USERNAME }}
+              dockerHubPassword: ${{ secrets.DOCKER_PASSWORD }}
