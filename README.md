@@ -26,6 +26,11 @@
 ## qBittorrent-Enhanced-Edition 4.1.9.15
 
 # Changelogs
+## 2020/01/12
+
+      1、默认缓存大小设置为512M，提升下载性能
+      2、除了自动更新tracker外，内置400多条tracker，默认启用，以便于在GitHub连接有问题时使用
+
 ## 2020/01/06
 
       1、修改conf，优化参数，减少手动设置
