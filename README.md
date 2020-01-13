@@ -28,9 +28,7 @@
 | x86-64       | amd64-latest   |
 | arm64        | arm64v8-latest |
 
-### 版本：
-
-## qBittorrent-Enhanced-Edition 4.1.9.15
+### 版本：qBittorrent-Enhanced-Edition 4.1.9.15
 
 # Changelogs
 ## 2020/01/12
