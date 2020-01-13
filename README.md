@@ -22,18 +22,22 @@
 - 自动向所有tracker服务器会报，加快下载速度，提升连接数
 
 # Architecture
+### qBittorrent-Enhanced-Edition 4.1.9.15
 
 | Architecture | Tag            |
 | ------------ | -------------- |
 | x86-64       | amd64-latest   |
 | arm64        | arm64v8-latest |
 
-### 版本：qBittorrent-Enhanced-Edition 4.1.9.15
 
 # Changelogs
+## 2020/01/13
+
+      1、构建arm64版本镜像
+      
 ## 2020/01/12
 
-      1、默认缓存大小设置为512M，提升下载性能
+      1、默认缓存设置参数为 x86-64:512M、arm64:128M，提升下载性能
       2、除了自动更新tracker外，内置400多条tracker，默认启用，以便于在GitHub连接有问题时使用
 
 ## 2020/01/06
