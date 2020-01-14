@@ -13,6 +13,7 @@
 
 
 # 本镜像的一些优点
+- 全平台架构`x86-64`、`arm64`、`armhf`
 - 做了usermapping，使用你自己的账户权限来运行，这点对于群辉来说尤其重要
 - qBittorrent-Enhanced-Edition，没有包含多于的服务
 - 默认上海时区 Asia/Shanghai
@@ -24,16 +25,20 @@
 # Architecture
 ### qBittorrent-Enhanced-Edition 4.1.9.15
 
+# Architecture
+
 | Architecture | Tag            |
 | ------------ | -------------- |
 | x86-64       | amd64-latest   |
 | arm64        | arm64v8-latest |
+| armhf        | arm32v7-latest |
 
 
 # Changelogs
 ## 2020/01/13
 
-      1、构建arm64版本镜像
+      1、构建全平台架构镜像`x86-64`、`arm64`、`armhf`
+      2、设置磁盘缓存，默认参数`x86-64:512M`、`arm64:128M`、`armhf:128M`
       
 ## 2020/01/12
 
