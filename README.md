@@ -24,7 +24,7 @@
 - 自动向所有tracker服务器会报，加快下载速度，提升连接数
 
 # Architecture
-### qBittorrent-Enhanced-Edition 4.1.9.15
+### Version qBittorrent-Enhanced-Edition 4.1.9.15
 
 
 | Architecture | Tag            |
