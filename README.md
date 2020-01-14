@@ -26,7 +26,6 @@
 # Architecture
 ### qBittorrent-Enhanced-Edition 4.1.9.15
 
-# Architecture
 
 | Architecture | Tag            |
 | ------------ | -------------- |
