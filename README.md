@@ -20,6 +20,7 @@
 - qBittorrent-Enhanced-Edition屏蔽吸血客户端
 - 内置优化过的conf文件，减少手工设置
 - 默认中文
+- 内置400条tracker方便在连接GitHub出错时使用
 - 自动向所有tracker服务器会报，加快下载速度，提升连接数
 
 # Architecture
