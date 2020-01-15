@@ -1,4 +1,6 @@
 ## 群晖nas自用：
+博客：https://sleele.com/2020/01/09/docker-qbittorrent增强版，反迅雷吸血  
+GitHub：https://github.com/SuperNG6/Docker-qBittorrent-Enhanced-Edition  
 
 本项目基于gshang2017的Docker-qBittorrent-Enhanced-Edition，稍作修改增加了权限管理，以便于使用自己的账户权限运行，自用。
 
