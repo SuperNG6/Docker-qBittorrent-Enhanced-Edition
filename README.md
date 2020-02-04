@@ -17,7 +17,7 @@ GitHub：https://github.com/SuperNG6/Docker-qBittorrent-Enhanced-Edition
 # 本镜像的一些优点
 - 全平台架构`x86-64`、`arm64`、`armhf`
 - 做了usermapping，使用你自己的账户权限来运行，这点对于群辉来说尤其重要
-- qBittorrent-Enhanced-Edition，没有包含多于的服务
+- 纯qBittorrent-Enhanced-Edition，没有包含多于的服务
 - 默认上海时区 Asia/Shanghai
 - qBittorrent-Enhanced-Edition屏蔽吸血客户端
 - 内置优化过的conf文件，减少手工设置
