@@ -93,7 +93,7 @@ docker create  \
 ````
 version: "2"
 services:
-  aria2:
+  qbittorrentee:
     image: superng6/qbittorrentee
     container_name: qbittorrentee
     environment:
