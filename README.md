@@ -23,7 +23,7 @@ GitHub：https://github.com/SuperNG6/Docker-qBittorrent-Enhanced-Edition
 - 内置优化过的conf文件，减少手工设置
 - 默认中文
 - 内置400条tracker方便在连接GitHub出错时使用
-- 自动向所有tracker服务器会报，加快下载速度，提升连接数
+- 自动向所有tracker服务器汇报，加快下载速度，提升连接数
 
 # Architecture
 ### Version qBittorrent-Enhanced-Edition 4.1.9.15
