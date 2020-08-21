@@ -1,9 +1,9 @@
-FROM lsiobase/alpine:3.10 as compilingqB
+FROM lsiobase/alpine:3.12 as compilingqB
 
 # compiling qB
 # set version label
-ARG  LIBTORRENT_VER=1.1.14
-ARG  QBITTORRENT_VER=4.1.9.15
+ARG  LIBTORRENT_VER=1.2.9
+ARG  QBITTORRENT_VER=4.2.5.13
 LABEL build_version="SuperNG6.qbittorrentEE:- ${QBITTORRENT_VER}"
 LABEL maintainer="SuperNG6"
 
@@ -30,7 +30,7 @@ RUN  apk add --no-cache ca-certificates make g++ gcc qt5-qtsvg-dev boost-dev qt5
 
 # docker qBittorrent-Enhanced-Edition
 
-FROM lsiobase/alpine:3.10
+FROM lsiobase/alpine:3.12
 
 # environment settings
 ENV TZ=Asia/Shanghai
