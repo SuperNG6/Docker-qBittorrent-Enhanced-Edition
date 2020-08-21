@@ -12,11 +12,10 @@ RUN  apk add --no-cache ca-certificates make g++ gcc qt5-qtsvg-dev boost-dev qt5
 RUN  mkdir /qbtorrent
 RUN  wget -P /qbtorrent https://github.com/arvidn/libtorrent/releases/download/libtorrent-${LIBTORRENT_VER}/libtorrent-rasterbar-${LIBTORRENT_VER}.tar.gz
 RUN  tar  -zxvf  /qbtorrent/libtorrent-rasterbar-${LIBTORRENT_VER}.tar.gz  -C    /qbtorrent
-RUN  cd  /qbtorrent/libtorrent-rasterbar-${LIBTORRENT_VER}
-RUN  ./configure  --host=x86_64-alpine-linux-musl
-RUN  make -j$(nproc) install-strip \
+RUN  /qbtorrent/libtorrent-rasterbar-${LIBTORRENT_VER}/configure  --host=x86_64-alpine-linux-musl \
+&&  make -j$(nproc) install-strip
 # qBittorrent-Enhanced-Edition
-&&   wget  -P /qbtorrent https://github.com/c0re100/qBittorrent-Enhanced-Edition/archive/release-${QBITTORRENT_VER}.zip   \
+RUN  wget  -P /qbtorrent https://github.com/c0re100/qBittorrent-Enhanced-Edition/archive/release-${QBITTORRENT_VER}.zip   \
 &&   unzip   /qbtorrent/release-${QBITTORRENT_VER}.zip  -d    /qbtorrent \
 &&   cd  /qbtorrent/qBittorrent-Enhanced-Edition-release-${QBITTORRENT_VER} \
 # make install
