@@ -1,7 +1,11 @@
 name: Build Amd64 Image
 on:
-  release:
-    types: [published]
+  push:
+    branches:
+      - 'master'
+    paths-ignore:
+      - "README.md"
+
 jobs:
   build:
       runs-on: ubuntu-latest
