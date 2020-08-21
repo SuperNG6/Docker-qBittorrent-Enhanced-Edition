@@ -37,6 +37,12 @@ GitHub：https://github.com/SuperNG6/Docker-qBittorrent-Enhanced-Edition
 
 
 # Changelogs
+## 2020/08/21
+
+    1、更新LIBTORRENT v1.2.8，QBITTORRENT v4.2.5.13
+    2、更新base image
+    3、没别的更新了，已经很完善了
+
 ## 2020/01/13
 
       1、构建全平台架构镜像`x86-64`、`arm64`、`armhf`
