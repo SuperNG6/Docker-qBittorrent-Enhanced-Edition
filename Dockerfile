@@ -39,8 +39,8 @@ ENV WEBUIPORT=8080
 COPY root /
 COPY --from=compilingqB  /qbittorrent  /
 
-# install ca-certificates tzdata python3
-RUN  apk add --no-cache ca-certificates tzdata python3 \
+# install  python3
+RUN  apk add --no-cache python3 \
 &&   rm -rf /var/cache/apk/*   \
 &&   chmod a+x  /usr/local/bin/qbittorrent-nox  
 
