@@ -26,7 +26,7 @@ GitHub：https://github.com/SuperNG6/Docker-qBittorrent-Enhanced-Edition
 - 自动向所有tracker服务器汇报，加快下载速度，提升连接数
 
 # Architecture
-### Version qBittorrent-Enhanced-Edition 4.1.9.15
+### qBittorrent Enhanced Edition v4.2.5.15
 
 
 | Architecture | Tag            |
