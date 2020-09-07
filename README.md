@@ -37,6 +37,12 @@ GitHub：https://github.com/SuperNG6/Docker-qBittorrent-Enhanced-Edition
 
 
 # Changelogs
+
+## 2020/09/07
+    1、qBittorrent Enhanced Edition update to v4.2.5.15
+    2、libtorrent update to 1.2.10-0f0afec8c (Fix #127)
+    3、Optional Button for re-enable Torrent IP Filter (Tools>Enable Torrent IP Filter).
+
 ## 2020/08/21
 
     1、更新LIBTORRENT v1.2.8，QBITTORRENT v4.2.5.13

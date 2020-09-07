@@ -2,8 +2,8 @@ FROM lsiobase/alpine:3.12 as compilingqB
 
 # compiling qB
 # set version label
-ARG  LIBTORRENT_VER=1.2.8
-ARG  QBITTORRENT_VER=4.2.5.13
+ARG  LIBTORRENT_VER=1.2.10
+ARG  QBITTORRENT_VER=4.2.5.15
 LABEL build_version="SuperNG6.qbittorrentEE:- ${QBITTORRENT_VER}"
 LABEL maintainer="SuperNG6"
 
