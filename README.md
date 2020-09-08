@@ -37,6 +37,9 @@ GitHub：https://github.com/SuperNG6/Docker-qBittorrent-Enhanced-Edition
 
 
 # Changelogs
+## 2020/09/08
+
+    1、qBittorrent Enhanced Edition update to v4.2.5.16
 
 ## 2020/09/07
     1、qBittorrent Enhanced Edition update to v4.2.5.15
