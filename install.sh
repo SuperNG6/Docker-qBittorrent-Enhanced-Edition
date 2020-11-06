@@ -24,7 +24,7 @@ fi
 
 # Download files
 echo "Downloading binary file: ${ARCH}
-TAG=cat /qbittorrent/ReleaseTag | head -n1
+TAG=$(cat /qbittorrent/ReleaseTag | head -n1)
 wget -O ${PWD}/qbittorrentee.zip https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases/download/release-${TAG}/${ARCH} /dev/null 2>&1
 
 
