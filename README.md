@@ -38,6 +38,7 @@ GitHub：https://github.com/SuperNG6/Docker-qBittorrent-Enhanced-Edition
 
     1、qBittorrent Enhanced Edition update to v4.3.0.10
     2、x86-64、arm64、armhf由自编译转为官方静态编译版
+    3、减小镜像体积
 
 ## 2020/09/08
 
