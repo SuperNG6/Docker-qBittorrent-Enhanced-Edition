@@ -9,8 +9,8 @@ COPY install.sh /qbittorrent/install.sh
 COPY ReleaseTag /qbittorrent/ReleaseTag
 
 RUN set -ex \
-	&& chmod +x /root/install.sh \
-	&& /root/install.sh "${TARGETPLATFORM}"
+	&& chmod +x /qbittorrent/install.sh \
+	&& /qbittorrent/install.sh "${TARGETPLATFORM}"
 
 # docker qBittorrent-Enhanced-Edition
 
