@@ -1,14 +1,11 @@
-## 群晖nas自用：
+## 支持群晖、为联通等x64、arm64、arm32平台nas：
 博客：https://sleele.com/2020/01/09/docker-qbittorrent增强版，反迅雷吸血  
 GitHub：https://github.com/SuperNG6/Docker-qBittorrent-Enhanced-Edition  
 
-本项目基于gshang2017的Docker-qBittorrent-Enhanced-Edition，稍作修改增加了权限管理，以便于使用自己的账户权限运行，自用。
 
 [https://hub.docker.com/r/superng6/qbittorrentee](https://hub.docker.com/r/superng6/qbittorrentee)
 
 ### 感谢以下项目:
-
-[https://github.com/gshang2017/docker/tree/master/qBittorrent](https://github.com/gshang2017/docker/tree/master/qBittorrent)   
 [https://github.com/qbittorrent/qBittorrent](https://github.com/qbittorrent/qBittorrent)   
 [https://github.com/c0re100/qBittorrent-Enhanced-Edition](https://github.com/c0re100/qBittorrent-Enhanced-Edition)    
 [https://github.com/ngosang/trackerslist]( https://github.com/ngosang/trackerslist)
@@ -16,6 +13,7 @@ GitHub：https://github.com/SuperNG6/Docker-qBittorrent-Enhanced-Edition
 
 # 本镜像的一些优点
 - 全平台架构`x86-64`、`arm64`、`armhf`
+- 静态编译qbittorrentee
 - 做了usermapping，使用你自己的账户权限来运行，这点对于群辉来说尤其重要
 - 纯qBittorrent-Enhanced-Edition，没有包含多于的服务
 - 默认上海时区 Asia/Shanghai
@@ -31,12 +29,17 @@ GitHub：https://github.com/SuperNG6/Docker-qBittorrent-Enhanced-Edition
 
 | Architecture | Tag            |
 | ------------ | -------------- |
-| x86-64       | amd64-latest   |
-| arm64        | arm64v8-latest |
-| armhf        | arm32v7-latest |
+| x86-64       | latest   |
+| arm64        | latest |
+| armhf        | latest |
 
 
 # Changelogs
+## 2020/11/06
+
+    1、qBittorrent Enhanced Edition update to v4.3.0.10
+    2、x86-64、arm64、armhf由自编译转为官方静态编译版
+
 ## 2020/09/08
 
     1、qBittorrent Enhanced Edition update to v4.2.5.16

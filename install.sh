@@ -1,35 +1,26 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-# Set ARG
-PLATFORM=$1
-if [ -z "$PLATFORM" ]; then
-    ARCH="64"
+# Check CPU architecture
+ARCH=$(uname -m)
+
+echo -e "${INFO} Check CPU architecture ..."
+if [[ ${ARCH} == "x86_64" ]]; then
+    ARCH="qbittorrent-nox_linux_x64_static"
+elif [[ ${ARCH} == "aarch64" ]]; then
+    ARCH="qbittorrent-nox_aarch64-linux-musl_static"
+elif [[ ${ARCH} == "armv7l" ]]; then
+    ARCH="qbittorrent-nox_arm-linux-musleabi_static"
 else
-    case "$PLATFORM" in
-        linux/amd64)
-            ARCH="qbittorrent-nox_linux_x64_static.zip"
-            ;;
-        linux/arm/v7)
-            ARCH="qbittorrent-nox_arm-linux-musleabi_static.zip"
-            ;;
-        linux/arm64|linux/arm64/v8)
-            ARCH="qbittorrent-nox_aarch64-linux-musl_static.zip"
-            ;;
-        *)
-            ARCH=""
-            ;;
-    esac
+    echo -e "${ERROR} This architecture is not supported."
+    exit 1
 fi
-[ -z "${ARCH}" ] && echo "Error: Not supported OS Architecture" && exit 1
 
 # Download files
-echo "Downloading binary file: ${ARCH}
+echo "Downloading binary file: ${ARCH}"
 TAG=$(cat /qbittorrent/ReleaseTag)
-wget -O ${PWD}/qbittorrentee.zip https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases/download/release-${TAG}/${ARCH} /dev/null 2>&1
+echo "qbittorrent version: ${TAG}"
+wget -O ${PWD}/qbittorrentee.zip https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases/download/release-${TAG}/${ARCH}.zip
 
-
-if [ $? -ne 0 ]; then
-    echo "Error: Failed to download binary file: ${ARCH}" && exit 1
-fi
 echo "Download binary file: ${ARCH} completed"
+
 unzip qbittorrentee.zip
