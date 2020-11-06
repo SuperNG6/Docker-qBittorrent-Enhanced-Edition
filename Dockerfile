@@ -1,16 +1,15 @@
-FROM lsiobase/alpine:3.12 as builder
+FROM --platform=${TARGETPLATFORM} lsiobase/alpine:3.12 as builder
 
-# compiling qB
-# set version label
-ARG  LIBTORRENT_VER=1.2.10
-ARG  QBITTORRENT_VER=4.3.0.10
-LABEL build_version="SuperNG6.qbittorrentEE:- ${QBITTORRENT_VER}"
 LABEL maintainer="SuperNG6"
+ARG TARGETPLATFORM
 
+WORKDIR /qbittorrent
 
-WORKDIR /qBittorrent
-RUN wget https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases/download/release-${QBITTORRENT_VER}/qbittorrent-nox_linux_x64_static.zip \
-&&  unzip qbittorrent-nox_linux_x64_static.zip
+COPY install.sh /root/install.sh
+
+RUN set -ex \
+	&& chmod +x /root/install.sh \
+	&& /root/install.sh "${TARGETPLATFORM}"
 
 # docker qBittorrent-Enhanced-Edition
 
