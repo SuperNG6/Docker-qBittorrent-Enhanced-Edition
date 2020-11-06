@@ -23,18 +23,13 @@ fi
 [ -z "${ARCH}" ] && echo "Error: Not supported OS Architecture" && exit 1
 
 # Download files
-echo "Downloading binary file: ${ARCH}"
-
-TAG=$(wget -qO- https://raw.githubusercontent.com/SuperNG6/Docker-qBittorrent-Enhanced-Edition/master/ReleaseTag | head -n1)
-wget -O ${PWD}/qee.zip https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases/download/release-${TAG}/${ARCH} /dev/null 2>&1
+echo "Downloading binary file: ${ARCH}
+TAG=cat /qbittorrent/ReleaseTag | head -n1
+wget -O ${PWD}/qbittorrentee.zip https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases/download/release-${TAG}/${ARCH} /dev/null 2>&1
 
 
 if [ $? -ne 0 ]; then
     echo "Error: Failed to download binary file: ${ARCH}" && exit 1
 fi
 echo "Download binary file: ${ARCH} completed"
-
-
-# Prepare
-echo "Prepare to use"
-unzip ${ARCH}
+unzip qbittorrentee.zip

@@ -5,7 +5,8 @@ ARG TARGETPLATFORM
 
 WORKDIR /qbittorrent
 
-COPY install.sh /root/install.sh
+COPY install.sh /qbittorrent/install.sh
+COPY ReleaseTag /qbittorrent/ReleaseTag
 
 RUN set -ex \
 	&& chmod +x /root/install.sh \
