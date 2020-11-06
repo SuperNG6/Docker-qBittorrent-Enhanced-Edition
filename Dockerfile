@@ -9,7 +9,8 @@ LABEL maintainer="SuperNG6"
 
 
 WORKDIR /qBittorrent
-RUN wget https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases/download/release-${QBITTORRENT_VER}/qbittorrent-nox_linux_x64_static_build
+RUN wget https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases/download/release-${QBITTORRENT_VER}/qbittorrent-nox_linux_x64_static.zip \
+&&  unzip qbittorrent-nox_linux_x64_static.zip
 
 # docker qBittorrent-Enhanced-Edition
 
@@ -21,7 +22,7 @@ ENV WEBUIPORT=8080
 
 # add local files and install qbitorrent
 COPY root /
-COPY --from=builder  /qBittorrent/qbittorrent-nox_linux_x64_static_build  /usr/local/bin/qbittorrent-nox
+COPY --from=builder  /qBittorrent/qbittorrent-nox   /usr/local/bin/qbittorrent-nox
 
 # install  python3
 RUN  apk add --no-cache python3 \
