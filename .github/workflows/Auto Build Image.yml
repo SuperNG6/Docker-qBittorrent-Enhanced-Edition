@@ -26,7 +26,7 @@ jobs:
       - name: Set Version
         id: set-version
         run: |
-          QEE=$(wget --no-check-certificate -qO- https://api.github.com/repos/JunzhouLiu/BILIBILI-HELPER/tags | grep 'name' | cut -d\" -f4 | head -1 | cut -c 2- )
+          QEE=$(wget --no-check-certificate -qO- https://api.github.com/repos/c0re100/qBittorrent-Enhanced-Edition/tags | grep 'name' | cut -d\" -f4 | head -1 | cut -c 9- )
           echo "::set-output name=version::${QEE}"
       - name: Cache tag
         id: cache-tag
