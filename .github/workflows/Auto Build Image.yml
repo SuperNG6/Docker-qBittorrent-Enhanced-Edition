@@ -1,0 +1,59 @@
+name: Auto Build Image
+
+on:
+  repository_dispatch:
+  workflow_dispatch:
+    schedule:
+      - cron: '30 2 * * *'
+
+jobs:
+  buildx:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Dockerhub login
+        env:
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        run: |
+          echo "${DOCKER_PASSWORD}" | docker login --username ${DOCKER_USERNAME} --password-stdin
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: crazy-max/ghaction-docker-buildx@v1
+        with:
+          buildx-version: latest
+      - name: Set Version
+        id: set-version
+        run: |
+          QEE=$(wget --no-check-certificate -qO- https://api.github.com/repos/c0re100/qBittorrent-Enhanced-Edition/tags | grep 'name' | cut -d\" -f4 | head -1 | cut -c 9- )
+          echo "::set-output name=version::${QEE}"
+      - name: Cache tag
+        id: cache-tag
+        uses: actions/cache@v2
+        with:
+          path: ./tag/
+          key: ${{ runner.os }}-tag-${{ steps.set-version.outputs.version }}
+      - name: Get latest release tag
+        id: get-release-tag
+        if: steps.cache-tag.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p ./tag
+          echo ${{ steps.set-version.outputs.version }} > ./tag/tag-${{ steps.set-version.outputs.version }}
+          echo "::set-output name=status::success"
+      - name: Build dockerfile tag
+        if: steps.get-release-tag.outputs.status == 'success'
+        run: |
+          docker buildx build \
+            --platform=linux/amd64,linux/arm/v7,linux/arm64 \
+            --output "type=image,push=true" \
+            --tag superng6/qbittorrentee:${{ steps.set-version.outputs.version }} \
+            --file ./Dockerfile . \
+      - name: Build dockerfile
+        if: steps.get-release-tag.outputs.status == 'success'
+        run: |
+          docker buildx build \
+            --platform=linux/amd64,linux/arm/v7,linux/arm64 \
+            --output "type=image,push=true" \
+            --file ./Dockerfile . \
+            --tag superng6/qbittorrentee:latest
