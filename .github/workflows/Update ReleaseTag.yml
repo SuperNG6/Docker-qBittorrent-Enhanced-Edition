@@ -40,6 +40,7 @@ jobs:
           echo ${{ steps.set-version.outputs.version }} > ./ReleaseTag
 
       - name: Push
+        if: steps.get-release-tag.outputs.status == 'success'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
