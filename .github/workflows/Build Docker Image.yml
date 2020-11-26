@@ -35,7 +35,7 @@ jobs:
 
       # 构建docker images 分为tag版和latest版
       - name: Build dockerfile tag
-        if: steps.get-release-tag.outputs.status == 'success'
+        if: steps.set-version.outputs.status == 'success'
         run: |
           docker buildx build \
             --platform=linux/amd64,linux/arm/v7,linux/arm64 \
@@ -44,7 +44,7 @@ jobs:
             --file ./Dockerfile . \
 
       - name: Build dockerfile
-        if: steps.get-release-tag.outputs.status == 'success'
+        if: steps.set-version.outputs.status == 'success'
         run: |
           docker buildx build \
             --platform=linux/amd64,linux/arm/v7,linux/arm64 \
