@@ -17,7 +17,7 @@ jobs:
         id: set-version
         run: |
           GLRT=$(wget --no-check-certificate -qO- https://api.github.com/repos/c0re100/qBittorrent-Enhanced-Edition/tags | grep 'name' | cut -d\" -f4 | head -1 | cut -c 9- )
-          echo "ReleaseTag=${GLRT}"  
+          echo "ReleaseTag=${GLRT}"
           echo "::set-output name=version::${GLRT}"
 
       # 缓存release tag，用作与下一次执行任务时获取到到release tag做对比
