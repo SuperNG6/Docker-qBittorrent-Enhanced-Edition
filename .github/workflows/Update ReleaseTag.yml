@@ -1,0 +1,47 @@
+name: Update ReleaseTag
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 12 * * *"
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout codebase
+        uses: actions/checkout@v2
+
+      - name: Set Version
+        id: set-version
+        run: |
+          QEE=$(wget --no-check-certificate -qO- https://api.github.com/repos/c0re100/qBittorrent-Enhanced-Edition/tags | grep 'name' | cut -d\" -f4 | head -1 | cut -c 9- )
+          echo "::set-output name=version::${QEE}"
+          echo "::set-output name=status::success"
+
+      - name: Cache tag
+        id: cache-tag
+        uses: actions/cache@v2
+        with:
+          path: ./tag/
+          key: ${{ runner.os }}-tag-${{ steps.set-version.outputs.version }}
+
+      - name: Get latest release tag
+        id: get-release-tag
+        if: steps.cache-tag.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p ./tag
+          echo ${{ steps.set-version.outputs.version }} > ./tag/tag-${{ steps.set-version.outputs.version }}
+          echo "::set-output name=status::success"
+
+      - name: Update ReleaseTag
+        if: steps.get-release-tag.outputs.status == 'success'
+        run: |
+          echo {{ steps.set-version.outputs.version }} > ./ReleaseTag
+
+      - name: Push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -am "Update ReleaseTag-${{ steps.set-version.outputs.version }}"
+          git push -v --progress
