@@ -37,7 +37,7 @@ jobs:
       - name: Update ReleaseTag
         if: steps.get-release-tag.outputs.status == 'success'
         run: |
-          echo {{ steps.set-version.outputs.version }} > ./ReleaseTag
+          echo ${{ steps.set-version.outputs.version }} > ./ReleaseTag
 
       - name: Push
         run: |
