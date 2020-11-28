@@ -1,4 +1,4 @@
-## 支持群晖、为联通等x64、arm64、arm32平台nas：
+## 支持群晖、为联通等x64、arm64、arm32平台nas
 博客：https://sleele.com/2020/01/09/docker-qbittorrent增强版，反迅雷吸血  
 GitHub：https://github.com/SuperNG6/Docker-qBittorrent-Enhanced-Edition  
 
