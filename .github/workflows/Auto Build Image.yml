@@ -1,4 +1,4 @@
-name: Build Docker Image
+name: Auto Build Docker Image
 
 on:
   workflow_dispatch:
@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        
+
       # Build and push Docker images
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
