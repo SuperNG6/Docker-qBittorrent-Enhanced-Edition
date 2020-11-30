@@ -1,4 +1,4 @@
-## 支持群晖、为联通等x64、arm64、arm32平台nas
+## 支持群晖、威联通等x64、arm64、arm32平台nas
 博客：https://sleele.com/2020/01/09/docker-qbittorrent增强版，反迅雷吸血  
 GitHub：https://github.com/SuperNG6/Docker-qBittorrent-Enhanced-Edition  
 
@@ -10,6 +10,10 @@ GitHub：https://github.com/SuperNG6/Docker-qBittorrent-Enhanced-Edition
 [https://github.com/c0re100/qBittorrent-Enhanced-Edition](https://github.com/c0re100/qBittorrent-Enhanced-Edition)    
 [https://github.com/ngosang/trackerslist]( https://github.com/ngosang/trackerslist)
 
+
+###  其他项目 Docker qBittorrent 中国优化版
+https://github.com/SuperNG6/docker-qbittorrent
+https://hub.docker.com/r/superng6/qbittorrent
 
 # 本镜像的一些优点
 - 全平台架构`x86-64`、`arm64`、`armhf`
@@ -34,6 +38,10 @@ GitHub：https://github.com/SuperNG6/Docker-qBittorrent-Enhanced-Edition
 
 
 # Changelogs
+## 2020/11/30
+
+    1、自动同步更新最新版本qBittorrent Enhanced Edition
+
 ## 2020/11/06
 
     1、qBittorrent Enhanced Edition update to v4.3.0.10
