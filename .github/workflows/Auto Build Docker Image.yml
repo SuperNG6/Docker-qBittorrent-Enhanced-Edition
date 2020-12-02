@@ -38,7 +38,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ./tag/
-          key: ${{ runner.os }}-tag-${{ steps.set-version.outputs.version }}
+          key: ${{ runner.os }}-tag-v${{ steps.set-version.outputs.version }}
 
       # 获取将latest release tag，未命中缓存则更新ReleaseTag
       - name: Get latest release tag
