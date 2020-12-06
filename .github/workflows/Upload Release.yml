@@ -39,8 +39,9 @@ jobs:
 
       - name: Dowload release
         if: steps.get-release-tag.outputs.status == 'success'
-        working-directory: /qbittorrent
         run: |
+          mkdir ./qbittorrent
+          cd ./qbittorrent
           wget -q https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases/download/release-${{ steps.set-version.outputs.version }}/qbittorrent-nox_aarch64-linux-musl_static.zip
           wget -q https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases/download/release-${{ steps.set-version.outputs.version }}/qbittorrent-nox_arm-linux-musleabi_static.zip
           wget -q https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases/download/release-${{ steps.set-version.outputs.version }}/qbittorrent-nox_linux_x64_static.zip
@@ -56,4 +57,4 @@ jobs:
           tag_name: ${{ steps.set-version.outputs.version }}
           # body_path: Changelog
           files: |
-            /qbittorrent/*.zip
+            ./qbittorrent/*.zip
