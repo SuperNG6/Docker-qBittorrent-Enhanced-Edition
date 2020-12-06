@@ -1,9 +1,7 @@
-name: Upload files to release
+name: Manual Upload files to release
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '30 20 * * *'
 
 jobs:
   buildx:
@@ -19,26 +17,7 @@ jobs:
           echo "::set-output name=version::$(cat ReleaseTag | head -n1)"
           echo "ReleaseTag=$(cat ReleaseTag | head -n1)"
 
-      # 缓存release tag，用作与下一次执行任务时获取到到release tag做对比
-      - name: Cache tag
-        id: cache-tag
-        uses: actions/cache@v2
-        with:
-          path: ./tag/
-          key: ${{ runner.os }}-tag-release-v${{ steps.set-version.outputs.version }}
-
-      # 获取将latest release tag，未命中缓存则更新ReleaseTag
-      - name: Get latest release tag
-        id: get-release-tag
-        if: steps.cache-tag.outputs.cache-hit != 'true'
-        run: |
-          mkdir -p ./tag
-          echo ${{ steps.set-version.outputs.version }} > ./tag/tag-${{ steps.set-version.outputs.version }}
-          echo "::set-output name=status::success"
-
-
-      - name: Dowload release
-        if: steps.get-release-tag.outputs.status == 'success'
+      - name: Dowload files
         run: |
           mkdir ./qbittorrent
           cd ./qbittorrent
@@ -48,7 +27,6 @@ jobs:
 
 
       - name: Upload files to release
-        if: steps.get-release-tag.outputs.status == 'success'
         uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
