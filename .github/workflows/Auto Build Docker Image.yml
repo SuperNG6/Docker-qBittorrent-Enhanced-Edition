@@ -25,33 +25,27 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # 获得仓库中的ReleaseTag
+      # 获取latest release tag，cut切割无关内容。和仓库中LocalReleaseTag对比，之后输出tag给之后的步骤
       - name: Set Version
         id: set-version
         run: |
-          echo "::set-output name=version::$(cat ReleaseTag | head -n1)"
-          echo "ReleaseTag=$(cat ReleaseTag | head -n1)"
+          TAG=$(wget --no-check-certificate -qO- https://api.github.com/repos/c0re100/qBittorrent-Enhanced-Edition/tags | grep 'name' | cut -d\" -f4 | head -1 | cut -c 9- )
 
-      # 缓存release tag，用作与下一次执行任务时获取到到release tag做对比
-      - name: Cache tag
-        id: cache-tag
-        uses: actions/cache@v2
-        with:
-          path: ./tag/
-          key: ${{ runner.os }}-tag-v${{ steps.set-version.outputs.version }}
+          OnlineReleaseTag=${TAG}
+          LocalReleaseTag=$(cat ReleaseTag | head -n1)
 
-      # 获取将latest release tag，未命中缓存则更新ReleaseTag
-      - name: Get latest release tag
-        id: get-release-tag
-        if: steps.cache-tag.outputs.cache-hit != 'true'
-        run: |
-          mkdir -p ./tag
-          echo ${{ steps.set-version.outputs.version }} > ./tag/tag-${{ steps.set-version.outputs.version }}
-          echo "::set-output name=status::success"
+          echo "LocalReleaseTag=$(cat ReleaseTag | head -n1)"
+          echo "OnlineReleaseTag=${TAG}"
+
+          if [ "${LocalReleaseTag}" != "${OnlineReleaseTag}" ]
+          then
+             echo "::set-output name=version::${TAG}"
+             echo "::set-output name=status::success"
+          fi
 
       # Build and push
       - name: Build and push
-        if: steps.get-release-tag.outputs.status == 'success'
+        if: steps.set-version.outputs.status == 'success'
         uses: docker/build-push-action@v2
         with:
           file: ./Dockerfile
