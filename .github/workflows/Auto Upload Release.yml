@@ -43,7 +43,8 @@ jobs:
           cd ./qbittorrent
           wget -q https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases/download/release-${{ steps.set-version.outputs.version }}/qbittorrent-nox_aarch64-linux-musl_static.zip
           wget -q https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases/download/release-${{ steps.set-version.outputs.version }}/qbittorrent-nox_arm-linux-musleabi_static.zip
-          wget -q https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases/download/release-${{ steps.set-version.outputs.version }}/qbittorrent-nox_linux_x64_static.zip
+          wget -q https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases/download/release-${{ steps.set-version.outputs.version }}/qbittorrent-nox_x86_64-linux-musl_static.zip
+
 
 
       - name: Upload files to release
