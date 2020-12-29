@@ -5,7 +5,7 @@ ARCH=$(uname -m)
 
 echo -e "${INFO} Check CPU architecture ..."
 if [[ ${ARCH} == "x86_64" ]]; then
-    ARCH="qbittorrent-nox_linux_x64_static"
+    ARCH="qbittorrent-nox_x86_64-linux-musl_static"
 elif [[ ${ARCH} == "aarch64" ]]; then
     ARCH="qbittorrent-nox_aarch64-linux-musl_static"
 elif [[ ${ARCH} == "armv7l" ]]; then
