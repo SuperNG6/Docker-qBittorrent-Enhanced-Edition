@@ -28,7 +28,7 @@ https://hub.docker.com/r/superng6/qbittorrent
 - 自动向所有tracker服务器汇报，加快下载速度，提升连接数
 
 # Architecture
-### qBittorrent Enhanced Edition v4.3.0.10
+### qBittorrent Enhanced Edition latest
 
 | Architecture | Tag            |
 | ------------ | -------------- |
