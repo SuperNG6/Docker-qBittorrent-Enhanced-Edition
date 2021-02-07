@@ -38,6 +38,10 @@ https://hub.docker.com/r/superng6/qbittorrent
 
 
 # Changelogs
+## 2020/02/07
+
+    1、qBittorrent Enhanced Edition update to v4.3.3.10
+
 ## 2020/11/30
 
     1、自动同步更新最新版本qBittorrent Enhanced Edition
@@ -80,9 +84,15 @@ https://hub.docker.com/r/superng6/qbittorrent
       3、默认中文
       4、基于qBittorrent-Enhanced-Edition 4.1.9.15 最新版的SSL有问题
       
-### 注意：
-
-1. qBittorrent-Enhanced-Edition 增强版 需下载对应版本ipfilter.dat放入qBittorrent配置文件夹才能屏蔽离线下载 [https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases](https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases)
+# 内外网访问
+webui端口不一致的情况下，请手动关闭如下选项（默认配置已关闭，如未关闭请手动关闭）  
+https://cdn.jsdelivr.net/gh/SuperNG6/pic@master/uPic/2021-02-02/CIwC4l.png
+该操作等价于修改配置文件中的如下选项  
+````
+WebUI\CSRFProtection=false
+WebUI\ClickjackingProtection=false
+WebUI\HostHeaderValidation=false
+````
 
 ## 关于群晖
 
@@ -91,7 +101,7 @@ https://hub.docker.com/r/superng6/qbittorrent
 ![rNyFsw](https://cdn.jsdelivr.net/gh/SuperNG6/pic@master/uPic/rNyFsw.jpg)
 
 ### 权限管理设置
-对你的``docker配置文件夹的根目录``进行如图操作，``你的下载文件夹的根目录``进行相似操作，去掉``管理``这个权限，只给``写入``,``读取``权限
+对你的``docker配置文件夹的根目录``进行如图操作，``你的下载文件夹的根目录``进行相似操作，去掉``管理``这个权限，只给``写入``,``读取``权限  
 ![HEmuK1](https://cdn.jsdelivr.net/gh/SuperNG6/pic@master/uPic/HEmuK1.jpg)
 
 ### docker命令行设置：
