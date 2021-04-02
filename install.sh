@@ -19,7 +19,7 @@ fi
 echo "Downloading binary file: ${ARCH}"
 TAG=$(cat /qbittorrent/ReleaseTag)
 echo "qbittorrent version: ${TAG}"
-wget -O ${PWD}/qbittorrentee.zip https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases/download/release-${TAG}/${ARCH}.zip
+wget -O ${PWD}/qbittorrentee.zip https://github.com/SuperNG6/Docker-qBittorrent-Enhanced-Edition/releases/download/${TAG}/${ARCH}.zip
 
 echo "Download binary file: ${ARCH} completed"
 
