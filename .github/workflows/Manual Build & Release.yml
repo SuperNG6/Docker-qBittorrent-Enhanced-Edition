@@ -1,6 +1,9 @@
 name: Manual Build and Release
 
 on:
+  push:
+    paths:
+      - "ReleaseTag"
   workflow_dispatch:
 
 jobs:
@@ -77,4 +80,3 @@ jobs:
           # body_path: Changelog
           files: |
             /tmp/qbittorrent-nox*
-            
