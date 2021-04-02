@@ -3,7 +3,7 @@ name: Manual Build and Release
 on:
   push:
     paths:
-      - "ReleaseTag"
+      - ".github/workflows/cross_build.sh"
   workflow_dispatch:
 
 jobs:
