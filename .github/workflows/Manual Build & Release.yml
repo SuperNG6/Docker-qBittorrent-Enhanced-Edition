@@ -1,0 +1,80 @@
+name: Manual Build and Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  # cross compile for some other platforms, like arm, mips, etc.
+  cross-compile:
+    runs-on: ubuntu-latest
+    container: "alpine:latest"
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # cross toolchain downloads from: https://musl.cc/
+          # you need to find the name ${cross_host}-cross.tgz
+          # openssl_compiler choose from openssl source directory `./Configure LIST`
+          # qt_device choose from https://github.com/qt/qtbase/tree/dev/mkspecs/devices/
+          # qt_xplatform choose from https://github.com/qt/qtbase/tree/dev/mkspecs/
+          - cross_host: arm-linux-musleabi
+            openssl_compiler: linux-armv4
+            qt_device: linux-arm-generic-g++
+          - cross_host: aarch64-linux-musl
+            openssl_compiler: linux-aarch64
+            qt_device: linux-arm-generic-g++
+          - cross_host: mips-linux-musl
+            openssl_compiler: linux-mips32
+            qt_device: linux-generic-g++
+          - cross_host: mipsel-linux-musl
+            openssl_compiler: linux-mips32
+            qt_device: linux-generic-g++
+          - cross_host: mips64-linux-musl
+            openssl_compiler: linux64-mips64
+            qt_device: linux-generic-g++
+          - cross_host: x86_64-linux-musl
+            openssl_compiler: linux-x86_64
+            qt_device: linux-generic-g++
+          - cross_host: x86_64-w64-mingw32
+            openssl_compiler: mingw64
+            qt_xplatform: win32-g++
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # 获得仓库中的ReleaseTag
+      - name: Set Version
+        id: set-version
+        run: |
+          echo "::set-output name=version::$(cat ReleaseTag | head -n1)"
+          echo "ReleaseTag=$(cat ReleaseTag | head -n1)"
+
+      - name: cross compile nox-static
+        env:
+          CROSS_HOST: "${{ matrix.cross_host }}"
+          OPENSSL_COMPILER: "${{ matrix.openssl_compiler }}"
+          QT_DEVICE: "${{ matrix.qt_device }}"
+          QT_XPLATFORM: "${{matrix.qt_xplatform}}"
+          ReleaseTag: "${{ steps.set-version.outputs.version }}"
+        run: |
+          chmod a+x .github/workflows/cross_build.sh
+          .github/workflows/cross_build.sh
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: qbittorrent-nox_${{ matrix.cross_host }}_static
+          path: |
+            /tmp/qbittorrent-nox*
+
+      - name: Upload files to release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          name: qBittorrent Enhanced Edition v${{ steps.set-version.outputs.version }}
+          tag_name: ${{ steps.set-version.outputs.version }}
+          # body_path: Changelog
+          files: |
+            /tmp/qbittorrent-nox*
+            
