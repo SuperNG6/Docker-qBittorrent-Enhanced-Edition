@@ -205,7 +205,7 @@ unset LIBS CPPFLAGS
 # build qbittorrent
 wget --no-check-certificate https://github.com/c0re100/qBittorrent-Enhanced-Edition/archive/refs/tags/release-${ReleaseTag}.tar.gz
 tar -xzf release-${ReleaseTag}.tar.gz
-cd ./qBittorrent-release-${ReleaseTag}
+cd ./qBittorrent-Enhanced-Edition-release-${ReleaseTag}
 if [ "${TARGET_HOST}" = 'win' ]; then
   find \( -name '*.cpp' -o -name '*.h' \) -type f -print0 |
     xargs -0 -r sed -i 's/Windows\.h/windows.h/g;
