@@ -2,8 +2,8 @@ name: Manual Build and Release
 
 on:
   push:
-    paths:
-      - ".github/workflows/cross_build.sh"
+    branches:
+      - 4.2.5.16
   workflow_dispatch:
 
 jobs:
