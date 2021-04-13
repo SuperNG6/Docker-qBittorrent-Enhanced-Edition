@@ -1,9 +1,6 @@
 name: Manual Build and Release
 
 on:
-  push:
-    branches:
-      - 4.2.5.16
   workflow_dispatch:
 
 jobs:
