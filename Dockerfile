@@ -1,8 +1,9 @@
 FROM lsiobase/alpine:3.13 as builder
 LABEL maintainer="SuperNG6"
 
-ARG QBITTORRENT_VER=4.2.5.16
 COPY install.sh /root/install.sh
+COPY ReleaseTag /root/ReleaseTag
+
 RUN apk add --no-cache ca-certificates make g++ gcc qt5-qtsvg-dev boost-dev qt5-qttools-dev file
 RUN chmod +x /root/install.sh && bash /root/install.sh
 
