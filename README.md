@@ -38,7 +38,12 @@ https://hub.docker.com/r/superng6/qbittorrent
 
 
 # Changelogs
-## 2020/02/07
+## 2021/04/15
+
+    1、增加了大量历史版本，详情请见 docker hub tags
+    https://hub.docker.com/r/superng6/qbittorrentee/tags?page=1&ordering=last_updated
+
+## 2021/02/07
 
     1、qBittorrent Enhanced Edition update to v4.3.3.10
 
