@@ -29,8 +29,7 @@ COPY --from=builder /qbittorrent/qbittorrent /
 ARG LD_LIBRARY_PATH=/usr/local/lib
 ENV TZ=Asia/Shanghai \
     WEBUI_PORT=8080 \
-    PUID=1026 PGID=100 \
-    UT=true
+    PUID=1026 PGID=100
 
 # install python3
 RUN apt -y update && DEBIAN_FRONTEND=noninteractive apt -y install python3 \
