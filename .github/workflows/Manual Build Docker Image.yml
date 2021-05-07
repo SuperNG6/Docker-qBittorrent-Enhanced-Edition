@@ -1,9 +1,6 @@
 name: Manual Build Docker Image
 
 on:
-  push:
-    paths:
-      - "ReleaseTag"
   workflow_dispatch:
 
 jobs:
@@ -44,4 +41,3 @@ jobs:
           push: true
           tags: |
             superng6/qbittorrentee:${{ steps.set-version.outputs.version }}
-            superng6/qbittorrentee:latest
