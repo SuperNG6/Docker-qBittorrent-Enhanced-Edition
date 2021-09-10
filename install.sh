@@ -1,5 +1,5 @@
 
-#!/usr/bin/env bash
+#!/usr/bin/with-contenv bash
 
 # Check CPU architecture
 ARCH=$(uname -m)
@@ -10,7 +10,7 @@ if [[ ${ARCH} == "x86_64" ]]; then
 elif [[ ${ARCH} == "aarch64" ]]; then
     ARCH="qbittorrent-nox_aarch64-linux-musl_static.zip"
 elif [[ ${ARCH} == "armv7l" ]]; then
-    ARCH="qbittorrent-nox_arm-linux-musleabi_static.zip""
+    ARCH="qbittorrent-nox_arm-linux-musleabi_static.zip"
 else
     echo -e "${ERROR} This architecture is not supported."
     exit 1
