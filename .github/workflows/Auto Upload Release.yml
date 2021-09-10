@@ -46,10 +46,6 @@ jobs:
           wget -q https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases/download/release-${{ steps.set-version.outputs.version }}/qbittorrent-nox_aarch64-linux-musl_static.zip
 
 
-
-
-
-
       - name: Upload files to release
         if: steps.get-release-tag.outputs.status == 'success'
         uses: softprops/action-gh-release@v1
