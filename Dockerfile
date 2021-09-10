@@ -6,9 +6,9 @@ WORKDIR /qbittorrent
 COPY install.sh /qbittorrent/
 COPY ReleaseTag /qbittorrent/
 
-RUN set -ex \
-	&& chmod +x /qbittorrent/install.sh \
-	&& /qbittorrent/install.sh
+RUN cd /qbittorrent \
+	&& chmod a+x install.sh \
+	&& bash install.sh
 
 # docker qBittorrent-Enhanced-Edition
 
