@@ -6,6 +6,8 @@ WORKDIR /qbittorrent
 COPY install.sh /qbittorrent/
 COPY ReleaseTag /qbittorrent/
 
+RUN  apk add --no-cache ca-certificates curl
+
 RUN cd /qbittorrent \
 	&& chmod a+x install.sh \
 	&& bash install.sh
