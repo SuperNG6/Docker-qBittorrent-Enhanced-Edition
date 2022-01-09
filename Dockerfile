@@ -1,4 +1,4 @@
-FROM lsiobase/alpine:3.12 as builder
+FROM lsiobase/alpine:3.15 as builder
 LABEL maintainer="SuperNG6"
 
 WORKDIR /qbittorrent
