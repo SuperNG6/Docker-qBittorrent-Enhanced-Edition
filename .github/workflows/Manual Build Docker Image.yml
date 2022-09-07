@@ -44,3 +44,4 @@ jobs:
           push: true
           tags: |
             superng6/qbittorrentee:${{ steps.set-version.outputs.version }}
+            superng6/qbittorrentee:latest
