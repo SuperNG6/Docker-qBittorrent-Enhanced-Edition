@@ -8,7 +8,7 @@ echo -e "${INFO} Check CPU architecture ..."
 if [[ ${ARCH} == "x86_64" ]]; then
     ARCH="qbittorrent-enhanced-nox_x86_64-linux-musl_static.zip"
 elif [[ ${ARCH} == "aarch64" ]]; then
-    ARCH="qbittorrent-enhanced-nox_aarch64-linux-musl_static.zip"
+    ARCH="qbittorrent-enhanced-nox_arm-linux-musleabi_static.zip"
 else
     echo -e "${ERROR} This architecture is not supported."
     exit 1
