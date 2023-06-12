@@ -14,7 +14,7 @@ RUN cd /qbittorrent \
 
 # docker qBittorrent-Enhanced-Edition
 
-FROM lsiobase/alpine:3.12
+FROM lsiobase/alpine:3.16
 
 # environment settings
 ENV TZ=Asia/Shanghai
