@@ -9,8 +9,8 @@ fi
 # 检查Search文件，并创建.
 if [ ! -d "/config/qBittorrent/data/nova3/engines" ] ;  then 
 mkdir -p /config/qBittorrent/data/nova3/engines
-fi
 cp -ru /usr/local/qbittorrent/defaults/Search/*  /config/qBittorrent/data/nova3/engines
+fi
 
 # permissions
 chown -R abc:abc \
