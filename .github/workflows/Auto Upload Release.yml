@@ -22,7 +22,7 @@ jobs:
       # 缓存release tag，用作与下一次执行任务时获取到到release tag做对比
       - name: Cache tag
         id: cache-tag
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ./tag/
           key: ${{ runner.os }}-tag-${{ steps.set-version.outputs.version }}
