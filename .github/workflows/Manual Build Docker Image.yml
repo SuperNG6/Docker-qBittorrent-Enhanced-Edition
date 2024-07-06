@@ -36,7 +36,7 @@ jobs:
       # Build and push
       - name: Build and push
         if: steps.set-version.outputs.status == 'success'
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v6
         with:
           file: ./Dockerfile
           platforms: linux/amd64,linux/arm64,linux/arm/v7
