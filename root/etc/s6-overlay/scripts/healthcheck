@@ -1,0 +1,38 @@
+#!/bin/bash
+
+username=${WEB_USER:-admin}
+web_port=${WEBUIPORT:-8080}
+password=""
+if [ -a ${WEB_PASSWORD_FILE} ];then
+    password=$(cat ${WEB_PASSWORD_FILE})
+fi
+if [ -n "${WEB_PASSWORD}" ];then
+    password="${WEB_PASSWORD}"
+fi
+
+function check_via_password() {
+    curl -sSL -o /dev/null -c /tmp/healthcheck_cookie.txt --header "Referer: http://localhost:${web_port}" --data "username=${username}&password=${password}" http://localhost:${web_port}/api/v2/auth/login
+    http_code=$(curl -sSL -o /dev/null --header "Referer: http://localhost:${web_port}" -b /tmp/healthcheck_cookie.txt -w "%{http_code}" http://localhost:${web_port}/api/v2/app/version)
+    curl -X POST -sSL --header "Referer: http://localhost:${web_port}" -o /dev/null -b /tmp/healthcheck_cookie.txt http://localhost:${web_port}/api/v2/auth/logout
+    rm -f /tmp/healthcheck_cookie
+    if [[ "${http_code}" != "200" ]];then
+        exit 1
+    else
+        exit 0
+    fi
+}
+
+function check_port_only() {
+    http_code=$(curl -sSL -o /dev/null -w "%{http_code}" http://localhost:${web_port}/)
+    if [[ "${http_code}" != "200" ]];then
+        exit 1
+    else
+        exit 0
+    fi
+}
+
+if [ -n "${password}" ];then
+    check_via_password
+else
+    check_port_only
+fi
