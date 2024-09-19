@@ -39,6 +39,20 @@ https://hub.docker.com/r/superng6/qbittorrent
 
 
 # Changelogs
+## 2024/09/10
+
+    1、更新 base image
+    2、更新 s6-overlay V3 @ssfdust
+    3、增加 healtcheck script @ssfdust
+
+    新增环境变量 @ssfdust
+    WEB_PASSWORD=veryscrect	web密码环境变量
+    WEB_PASSWORD_FILE=/path/to/secrets	web密码文件环境变量
+    WEB_PBKDF2_PASSWORD=@Bytes(...)	web密码密文环境变量
+    WEB_PBKDF2_PASSWORD_FILE=/path/to/secrets	web密码密文文件环境变量
+
+    4、感谢 @ssfdust PR
+    
 ## 2021/04/15
 
     1、增加了大量历史版本，详情请见 docker hub tags

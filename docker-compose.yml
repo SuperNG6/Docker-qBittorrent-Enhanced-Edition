@@ -1,6 +1,6 @@
 version: "2"
 services:
-  aria2:
+  qbittorrentee:
     image: superng6/qbittorrentee
     container_name: qbittorrentee
     environment:
@@ -8,8 +8,8 @@ services:
       - PGID=100
       - TZ=Asia/Shanghai
     volumes:
-      - /path/to/appdata/config:/config
-      - /path/to/downloads:/downloads
+      - ./qbittorrentee/config:/config
+      - ./qbittorrentee/downloads:/downloads
     ports:
       - 6881:6881
       - 6881:6881/udp
