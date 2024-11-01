@@ -1,10 +1,9 @@
-#!/command/with-contenv bash
+#!/usr/bin/with-contenv bash
 
 # 检查config配置文件，并创建
 if [ ! -e "/config/qBittorrent/config/qBittorrent.conf" ] ;  then 
-    mkdir -p /config/qBittorrent/config/
-    cp /usr/local/qbittorrent/defaults/qBittorrent.conf /config/qBittorrent/config/qBittorrent.conf
-    python /etc/s6-overlay/scripts/generate-passwd /config/qBittorrent/config/qBittorrent.conf
+mkdir -p /config/qBittorrent/config/
+cp /usr/local/qbittorrent/defaults/qBittorrent.conf  /config/qBittorrent/config/qBittorrent.conf
 fi
 
 # 检查Search文件，并创建.

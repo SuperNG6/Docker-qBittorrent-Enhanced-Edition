@@ -26,7 +26,6 @@ https://hub.docker.com/r/superng6/qbittorrent
 - 默认中文
 - 内置400条tracker方便在连接GitHub出错时使用
 - 自动向所有tracker服务器汇报，加快下载速度，提升连接数
-- 提供了自定义用户名密码功能
 
 # Architecture
 ### qBittorrent Enhanced Edition latest
@@ -39,20 +38,6 @@ https://hub.docker.com/r/superng6/qbittorrent
 
 
 # Changelogs
-## 2024/09/10
-
-    1、更新 base image
-    2、更新 s6-overlay V3 @ssfdust
-    3、增加 healtcheck script @ssfdust
-
-    新增环境变量 @ssfdust
-    WEB_PASSWORD=veryscrect	web密码环境变量
-    WEB_PASSWORD_FILE=/path/to/secrets	web密码文件环境变量
-    WEB_PBKDF2_PASSWORD=@Bytes(...)	web密码密文环境变量
-    WEB_PBKDF2_PASSWORD_FILE=/path/to/secrets	web密码密文文件环境变量
-
-    4、感谢 @ssfdust PR
-    
 ## 2021/04/15
 
     1、增加了大量历史版本，详情请见 docker hub tags
@@ -136,8 +121,6 @@ docker create  \
     -e PUID=1026 \
     -e PGID=100 \
     -e TZ=Asia/Shanghai \
-    -e WEB_USER=admin \
-    -e WEB_PASSWORD=veryscrect \
     -p 6881:6881  \
     -p 6881:6881/udp  \
     -p 8080:8080  \
@@ -158,8 +141,6 @@ services:
       - PUID=1026
       - PGID=100
       - TZ=Asia/Shanghai
-      - WEB_USER=admin
-      - WEB_PASSWORD=veryscrect
     volumes:
       - /path/to/appdata/config:/config
       - /path/to/downloads:/downloads
@@ -177,18 +158,13 @@ services:
 |参数|说明|
 |-|:-|
 | `--name=qbittorrentee` |容器名|
-| `-p 8080:8080` |web访问端口 [IP:8080](IP:8080);(默认用户名:admin;默认密码为随机生成);此端口需与容器端口和环境变量保持一致，否则无法访问|
+| `-p 8080:8080` |web访问端口 [IP:8080](IP:8080);(默认用户名:admin;默认密码:adminadmin);此端口需与容器端口和环境变量保持一致，否则无法访问|
 | `-p 6881:6881` |BT下载监听端口|
 | `-p 6881:6881/udp` |BT下载DHT监听端口
 | `-v /配置文件位置:/config` |qBittorrent配置文件位置|
 | `-v /下载位置:/downloads` |qBittorrent下载位置|
 | `-e WEBUIPORT=8080` |web访问端口环境变量|
 | `-e TZ=Asia/Shanghai` |系统时区设置,默认为Asia/Shanghai|
-| `-e WEB_USER=admin` |用户名设置,默认为admin|
-| `-e WEB_PASSWORD=veryscrect` |明文密码设置,默认为空白|
-| `-e WEB_PASSWORD_FILE=/path/to/secrets` |明文密码文件路径,默认为空白|
-| `-e WEB_PBKDF2_PASSWORD=@Bytes(...)` |密文密码设置,默认为空白|
-| `-e WEB_PBKDF2_PASSWORD_FILE=/path/to/secrets` |密文密码文件路径,默认为空白|
 
 ### 群晖docker设置：
 
@@ -213,11 +189,6 @@ services:
 |-|:-|
 | `TZ=Asia/Shanghai` |系统时区设置,默认为Asia/Shanghai|
 | `WEBUIPORT=8080` |web访问端口环境变量|
-| `WEB_USER=admin` |web用户名环境变量|
-| `WEB_PASSWORD=veryscrect` |web密码环境变量|
-| `WEB_PASSWORD_FILE=/path/to/secrets` |web密码文件环境变量|
-| `WEB_PBKDF2_PASSWORD=@Bytes(...)` |web密码密文环境变量|
-| `WEB_PBKDF2_PASSWORD_FILE=/path/to/secrets` |web密码密文文件环境变量|
 
 ### 搜索：
 
