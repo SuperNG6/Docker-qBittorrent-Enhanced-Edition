@@ -6,6 +6,7 @@ on:
       - "ReleaseTag"
   workflow_dispatch:
 
+
 jobs:
   buildx:
     runs-on: ubuntu-latest
@@ -24,23 +25,23 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          
+
       # 获得仓库中的ReleaseTag
       - name: Set Version
         id: set-version
         run: |
           echo "::set-output name=version::$(cat ReleaseTag | head -n1)"
-          echo "ReleaseTag=$(cat ReleaseTag | head -n1)" 
-          echo "::set-output name=status::success"
+          echo "ReleaseTag=$(cat ReleaseTag | head -n1)"
 
       # Build and push
       - name: Build and push
-        if: steps.set-version.outputs.status == 'success'
+        if: steps.get-release-tag.outputs.status == 'success'
         uses: docker/build-push-action@v2
         with:
           file: ./Dockerfile
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          platforms: linux/amd64,linux/arm64
           push: true
           tags: |
             superng6/qbittorrentee:${{ steps.set-version.outputs.version }}
             superng6/qbittorrentee:latest
+
