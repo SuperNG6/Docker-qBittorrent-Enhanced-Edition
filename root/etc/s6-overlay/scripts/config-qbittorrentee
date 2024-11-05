@@ -24,11 +24,11 @@ messages=(
 )
 errors=(
     "Permssion of configuration directory is not set properly, try to set now..."
-    "Permssion of download directory is set not properly, try to set now..."
+    "Permssion of download directory is not set properly, try to set now..."
 )
 dirs=(
-    /downloads
     /config
+    /downloads
 )
 
 for i in $(seq 0 1 1)
