@@ -17,6 +17,7 @@ from helpers import download_file, retrieve_url
 
 class tokyotoshokan(object):
     url = 'http://tokyotosho.info'
+    name = 'Tokyo Toshokan'
 
     global page_count
     page_count = 1
