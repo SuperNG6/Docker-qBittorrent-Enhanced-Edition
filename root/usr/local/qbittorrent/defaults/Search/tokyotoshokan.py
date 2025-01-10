@@ -24,6 +24,7 @@ class tokyotoshokan(object):
         'games': '14'
     }
 
+
     global page_count
     page_count = 1
 
