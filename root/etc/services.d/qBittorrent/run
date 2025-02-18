@@ -1,0 +1,9 @@
+#!/usr/bin/with-contenv bash
+
+UMASK_SET=${UMASK_SET:-022}
+
+umask "$UMASK_SET"
+
+# 启动qBittorrent
+exec \
+	s6-setuidgid abc qbittorrent-nox --webui-port=$WEBUIPORT --profile=/config 

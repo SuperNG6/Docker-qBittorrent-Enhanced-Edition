@@ -39,6 +39,12 @@ https://hub.docker.com/r/superng6/qbittorrent
 
 
 # Changelogs
+## 2025/02/18
+
+    1、更新 base image
+    2、回退 s6-overlay V2，V3太复杂了
+    3、默认对/config /downloads 执行chown权限设置，避免部分小白遇到读写问题
+
 ## 2024/09/10
 
     1、更新 base image

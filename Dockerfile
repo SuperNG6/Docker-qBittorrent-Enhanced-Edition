@@ -1,4 +1,4 @@
-FROM lsiobase/alpine:3.20 as builder
+FROM superng6/alpine:3.21 AS builder
 LABEL maintainer="SuperNG6"
 
 WORKDIR /qbittorrent
@@ -14,7 +14,7 @@ RUN cd /qbittorrent \
 
 # docker qBittorrent-Enhanced-Edition
 
-FROM lsiobase/alpine:3.20
+FROM superng6/alpine:3.21
 
 # environment settings
 ENV TZ=Asia/Shanghai
