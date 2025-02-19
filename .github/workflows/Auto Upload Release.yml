@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       # 获得仓库中的ReleaseTag
       - name: Set Version
@@ -22,7 +22,7 @@ jobs:
       # 缓存release tag，用作与下一次执行任务时获取到到release tag做对比
       - name: Cache tag
         id: cache-tag
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ./tag/
           key: ${{ runner.os }}-tag-${{ steps.set-version.outputs.version }}
@@ -48,7 +48,7 @@ jobs:
 
       - name: Upload files to release
         if: steps.get-release-tag.outputs.status == 'success'
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
