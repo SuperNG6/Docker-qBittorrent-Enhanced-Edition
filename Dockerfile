@@ -25,7 +25,7 @@ COPY root /
 COPY --from=builder /qbittorrent/qbittorrent-nox /usr/local/bin/qbittorrent-nox
 
 # install python3
-RUN  apk add --no-cache python3 \
+RUN  apk add --no-cache python3 curl \
     && rm -rf /var/cache/apk/*  \
     && chmod a+x /usr/local/bin/qbittorrent-nox  
 
