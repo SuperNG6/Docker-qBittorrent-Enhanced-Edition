@@ -17,8 +17,9 @@ RUN cd /qbittorrent \
 FROM superng6/alpine:3.21
 
 # environment settings
-ENV TZ=Asia/Shanghai
-ENV WEBUIPORT=8080
+ENV TZ=Asia/Shanghai \
+    WEBUIPORT=8080 \
+    ENABLE_DOWNLOADS_PERM_FIX=true
 
 # add local files and install qbitorrent
 COPY root /

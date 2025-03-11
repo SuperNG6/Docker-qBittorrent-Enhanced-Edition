@@ -1,4 +1,4 @@
-version: "2"
+version: "3"
 services:
   qbittorrentee:
     image: superng6/qbittorrentee
@@ -7,6 +7,8 @@ services:
       - PUID=1026
       - PGID=100
       - TZ=Asia/Shanghai
+      - WEBUIPORT=8080
+      - ENABLE_DOWNLOADS_PERM_FIX=true
     volumes:
       - ./qbittorrentee/config:/config
       - ./qbittorrentee/downloads:/downloads

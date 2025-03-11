@@ -13,6 +13,10 @@ fi
 cp -ru /usr/local/qbittorrent/defaults/Search/* /config/qBittorrent/data/nova3/engines
 
 # permissions
-chown -R abc:abc \
-    /config \
-    /downloads
+chown -R abc:abc /config
+
+# 判断是否需要开启对 /downloads 文件夹进行权限修复操作
+if [ "$ENABLE_DOWNLOADS_PERM_FIX" = "true" ]; then
+    # 修改权限
+    chown -R abc:abc /downloads
+fi

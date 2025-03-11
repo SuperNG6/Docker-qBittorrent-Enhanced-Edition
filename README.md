@@ -39,6 +39,13 @@ https://hub.docker.com/r/superng6/qbittorrent
 
 
 # Changelogs
+## 2025/03/11
+
+    1、更新 base image，增加curl
+    2、新增 ENABLE_DOWNLOADS_PERM_FIX变量（默认`ENABLE_DOWNLOADS_PERM_FIX=true`）：
+    当`=true`时，则对`/downloads`文件夹进行权限修复；
+    当`=false`时，则不对`/downloads`文件夹进行权限修复；
+
 ## 2025/02/18
 
     1、更新 base image
@@ -142,8 +149,7 @@ docker create  \
     -e PUID=1026 \
     -e PGID=100 \
     -e TZ=Asia/Shanghai \
-    -e WEB_USER=admin \
-    -e WEB_PASSWORD=veryscrect \
+    -e ENABLE_DOWNLOADS_PERM_FIX=true \
     -p 6881:6881  \
     -p 6881:6881/udp  \
     -p 8080:8080  \
@@ -155,7 +161,7 @@ docker create  \
 
 ### docker-compose
 ````
-version: "2"
+version: "3"
 services:
   qbittorrentee:
     image: superng6/qbittorrentee
@@ -164,11 +170,11 @@ services:
       - PUID=1026
       - PGID=100
       - TZ=Asia/Shanghai
-      - WEB_USER=admin
-      - WEB_PASSWORD=veryscrect
+      - WEBUIPORT=8080
+      - ENABLE_DOWNLOADS_PERM_FIX=true
     volumes:
-      - /path/to/appdata/config:/config
-      - /path/to/downloads:/downloads
+      - ./qbittorrentee/config:/config
+      - ./qbittorrentee/downloads:/downloads
     ports:
       - 6881:6881
       - 6881:6881/udp
@@ -183,18 +189,15 @@ services:
 |参数|说明|
 |-|:-|
 | `--name=qbittorrentee` |容器名|
-| `-p 8080:8080` |web访问端口 [IP:8080](IP:8080);(默认用户名:admin;默认密码为随机生成);此端口需与容器端口和环境变量保持一致，否则无法访问|
+| `-p 8080:8080` |web访问端口 [IP:8080](IP:8080);(默认用户名:admin;默认密码为随机生成，首次启动容器请查看日志);此端口需与容器端口和环境变量保持一致，否则无法访问|
 | `-p 6881:6881` |BT下载监听端口|
 | `-p 6881:6881/udp` |BT下载DHT监听端口
 | `-v /配置文件位置:/config` |qBittorrent配置文件位置|
 | `-v /下载位置:/downloads` |qBittorrent下载位置|
 | `-e WEBUIPORT=8080` |web访问端口环境变量|
+| `-e ENABLE_DOWNLOADS_PERM_FIX=true` |/downloads文件夹权限修复|
 | `-e TZ=Asia/Shanghai` |系统时区设置,默认为Asia/Shanghai|
-| `-e WEB_USER=admin` |用户名设置,默认为admin|
-| `-e WEB_PASSWORD=veryscrect` |明文密码设置,默认为空白|
-| `-e WEB_PASSWORD_FILE=/path/to/secrets` |明文密码文件路径,默认为空白|
-| `-e WEB_PBKDF2_PASSWORD=@Bytes(...)` |密文密码设置,默认为空白|
-| `-e WEB_PBKDF2_PASSWORD_FILE=/path/to/secrets` |密文密码文件路径,默认为空白|
+
 
 ### 群晖docker设置：
 
@@ -219,11 +222,7 @@ services:
 |-|:-|
 | `TZ=Asia/Shanghai` |系统时区设置,默认为Asia/Shanghai|
 | `WEBUIPORT=8080` |web访问端口环境变量|
-| `WEB_USER=admin` |web用户名环境变量|
-| `WEB_PASSWORD=veryscrect` |web密码环境变量|
-| `WEB_PASSWORD_FILE=/path/to/secrets` |web密码文件环境变量|
-| `WEB_PBKDF2_PASSWORD=@Bytes(...)` |web密码密文环境变量|
-| `WEB_PBKDF2_PASSWORD_FILE=/path/to/secrets` |web密码密文文件环境变量|
+| `-e ENABLE_DOWNLOADS_PERM_FIX=true` |/downloads文件夹权限修复，默认开启，false关闭|
 
 ### 搜索：
 
