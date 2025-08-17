@@ -39,6 +39,11 @@ https://hub.docker.com/r/superng6/qbittorrent
 
 
 # Changelogs
+## 2025/08/17
+
+    1、更新 base image，增加curl
+    2、update qBittorrent Enhanced Edition v5.1.2.10
+
 ## 2025/03/11
 
     1、更新 base image，增加curl
