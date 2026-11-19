@@ -1,5 +1,6 @@
+#!/usr/bin/env bash
 
-#!/usr/bin/with-contenv bash
+set -e
 
 # Check CPU architecture
 ARCH=$(uname -m)
@@ -17,11 +18,17 @@ else
 fi
 
 # Download files
-echo "Downloading binary file: ${ARCH}"
-TAG=$(cat /qbittorrent/ReleaseTag)
-echo "qbittorrent version: ${TAG}"
-curl -L -o ${PWD}/qbittorrentee.zip https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases/download/release-$TAG/$ARCH
+TAG=${QBITTORRENT_VERSION:-$(cat /qbittorrent/ReleaseTag)}
+URL="https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases/download/release-$TAG/$ARCH"
 
-echo "Download binary file: ${ARCH} completed"
+echo "Downloading $ARCH for qBittorrent Enhanced Edition $TAG"
+if ! curl --fail --location --silent --show-error --output qbittorrentee.zip "$URL" || [[ ! -s qbittorrentee.zip ]]; then
+    echo "Failed to download a non-empty archive for $TAG ($ARCH)" >&2
+    exit 1
+fi
 
 unzip qbittorrentee.zip
+if [[ ! -s qbittorrent-nox ]]; then
+    echo "Archive $ARCH does not contain a non-empty qbittorrent-nox binary" >&2
+    exit 1
+fi

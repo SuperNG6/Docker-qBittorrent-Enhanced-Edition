@@ -6,6 +6,8 @@ WORKDIR /qbittorrent
 COPY install.sh /qbittorrent/
 COPY ReleaseTag /qbittorrent/
 
+ARG QBITTORRENT_VERSION
+
 RUN apk add --no-cache ca-certificates curl jq
 
 RUN cd /qbittorrent \
@@ -28,7 +30,8 @@ COPY --from=builder /qbittorrent/qbittorrent-nox /usr/local/bin/qbittorrent-nox
 # install python3
 RUN  apk add --no-cache python3 \
     && rm -rf /var/cache/apk/*  \
-    && chmod a+x /usr/local/bin/qbittorrent-nox  
+    && chmod a+x /usr/local/bin/qbittorrent-nox \
+    && /usr/local/bin/qbittorrent-nox --version
 
 # ports and volumes
 VOLUME /downloads /config
