@@ -1,4 +1,4 @@
-name: Build Docker Image
+name: Build qBittorrent Enhanced Edition s6 v3 Image
 
 on:
   workflow_dispatch:
@@ -7,26 +7,23 @@ on:
         description: Build and push even if the Docker Hub version tag already exists
         type: boolean
         default: false
-      force_release_sync:
-        description: Sync upstream assets and notes even if the GitHub Release is complete
-        type: boolean
-        default: false
-  schedule:
-    - cron: "30 21 * * *"
 
 permissions:
   contents: read
 
 concurrency:
-  group: publish-qbittorrentee
+  group: publish-qbittorrentee-s6v3
   cancel-in-progress: false
 
 env:
   DOCKER_IMAGE: superng6/qbittorrentee
+  TAG_SUFFIX: -s6v3
+  PLATFORMS: linux/amd64,linux/arm64
   UPSTREAM_REPO: c0re100/qBittorrent-Enhanced-Edition
 
 jobs:
   check-version:
+    if: github.ref == 'refs/heads/s6v3'
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.check.outputs.version }}
@@ -66,16 +63,16 @@ jobs:
             should_build=true
             decision="Manual force_build requested"
           else
-            tag_url="https://hub.docker.com/v2/repositories/$DOCKER_IMAGE/tags/$VERSION"
+          tag_url="https://hub.docker.com/v2/repositories/$DOCKER_IMAGE/tags/${VERSION}${TAG_SUFFIX}"
             status=$(curl --silent --show-error --max-time 30 --output /dev/null --write-out '%{http_code}' "$tag_url")
             case "$status" in
               200)
                 should_build=false
-                decision="Docker Hub already has $DOCKER_IMAGE:$VERSION"
+              decision="Docker Hub already has $DOCKER_IMAGE:${VERSION}${TAG_SUFFIX}"
                 ;;
               404)
                 should_build=true
-                decision="Docker Hub does not have $DOCKER_IMAGE:$VERSION"
+              decision="Docker Hub does not have $DOCKER_IMAGE:${VERSION}${TAG_SUFFIX}"
                 ;;
               *)
                 echo "::error::Docker Hub tag check failed with HTTP $status"
@@ -86,6 +83,10 @@ jobs:
           echo "should_build=$should_build" >> "$GITHUB_OUTPUT"
           echo "$decision" >> "$GITHUB_STEP_SUMMARY"
 
+      - name: Check out source
+        if: steps.check.outputs.should_build == 'true'
+        uses: actions/checkout@v7
+
       - name: Set up QEMU
         if: steps.check.outputs.should_build == 'true'
         uses: docker/setup-qemu-action@v4
@@ -93,6 +94,16 @@ jobs:
       - name: Set up Docker Buildx
         if: steps.check.outputs.should_build == 'true'
         uses: docker/setup-buildx-action@v4
+
+      - name: Test WebUI and s6 on all release platforms
+        if: steps.check.outputs.should_build == 'true'
+        run: |
+          IFS=, read -ra platforms <<< "$PLATFORMS"
+          for platform in "${platforms[@]}"; do
+            docker buildx build --load --platform "$platform" \
+              --build-arg "QBITTORRENT_VERSION=$VERSION" --tag local/qbittorrentee:s6v3-test .
+            bash tests/smoke-s6v3.sh local/qbittorrentee:s6v3-test "$platform" qBittorrent
+          done
 
       - name: Login to Docker Hub
         if: steps.check.outputs.should_build == 'true'
@@ -105,81 +116,12 @@ jobs:
         if: steps.check.outputs.should_build == 'true'
         uses: docker/build-push-action@v7
         with:
+          context: .
           file: ./Dockerfile
-          platforms: linux/amd64,linux/arm64
+          platforms: ${{ env.PLATFORMS }}
           push: true
           build-args: |
             QBITTORRENT_VERSION=${{ env.VERSION }}
           tags: |
-            ${{ env.DOCKER_IMAGE }}:${{ env.VERSION }}
-            ${{ env.DOCKER_IMAGE }}:latest
-
-  sync-release:
-    runs-on: ubuntu-latest
-    needs: check-version
-    permissions:
-      contents: write
-    env:
-      GH_TOKEN: ${{ github.token }}
-      VERSION: ${{ needs.check-version.outputs.version }}
-    steps:
-      - name: Check GitHub Release
-        id: check
-        shell: bash
-        env:
-          FORCE_RELEASE_SYNC: ${{ github.event_name == 'workflow_dispatch' && inputs.force_release_sync }}
-        run: |
-          set -euo pipefail
-
-          upstream="$RUNNER_TEMP/upstream-release.json"
-          downstream="$RUNNER_TEMP/downstream-release.json"
-          gh release view "release-$VERSION" --repo "$UPSTREAM_REPO" --json assets,body,url > "$upstream"
-          if ! jq -e '.assets | length > 0' "$upstream" >/dev/null; then
-            echo "::error::Upstream release $VERSION has no downloadable assets"
-            exit 1
-          fi
-
-          should_sync=true
-          if [[ "$FORCE_RELEASE_SYNC" != "true" ]]; then
-            status=$(curl --silent --show-error --max-time 30 --output "$downstream" \
-              --write-out '%{http_code}' --header "Authorization: Bearer $GH_TOKEN" \
-              --header 'Accept: application/vnd.github+json' \
-              "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/releases/tags/$VERSION")
-            case "$status" in
-              200)
-                missing=$(jq -er --slurpfile upstream "$upstream" \
-                  '([$upstream[0].assets[].name] - [.assets[].name]) | length' "$downstream")
-                if [[ "$missing" == "0" ]]; then
-                  should_sync=false
-                fi
-                ;;
-              404) ;;
-              *)
-                echo "::error::GitHub Release check failed with HTTP $status"
-                exit 1
-                ;;
-            esac
-          fi
-          echo "should_sync=$should_sync" >> "$GITHUB_OUTPUT"
-          echo "GitHub Release $VERSION needs sync: $should_sync" >> "$GITHUB_STEP_SUMMARY"
-
-      - name: Download upstream assets and notes
-        if: steps.check.outputs.should_sync == 'true'
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          mkdir -p "$RUNNER_TEMP/qbittorrent"
-          gh release download "release-$VERSION" --repo "$UPSTREAM_REPO" --dir "$RUNNER_TEMP/qbittorrent"
-          jq -r '"Upstream release: " + .url + "\n\n" + (.body // "")' \
-            "$RUNNER_TEMP/upstream-release.json" > "$RUNNER_TEMP/ReleaseNotes.md"
-
-      - name: Sync GitHub Release
-        if: steps.check.outputs.should_sync == 'true'
-        uses: softprops/action-gh-release@v3
-        with:
-          name: qBittorrent Enhanced Edition v${{ env.VERSION }}
-          tag_name: ${{ env.VERSION }}
-          body_path: ${{ runner.temp }}/ReleaseNotes.md
-          files: ${{ runner.temp }}/qbittorrent/*
-          fail_on_unmatched_files: true
+            ${{ env.DOCKER_IMAGE }}:${{ env.VERSION }}${{ env.TAG_SUFFIX }}
+            ${{ env.DOCKER_IMAGE }}:latest${{ env.TAG_SUFFIX }}

@@ -161,7 +161,7 @@ docker create  \
     -v /配置文件位置:/config  \
     -v /下载位置:/downloads  \
     --restart unless-stopped  \
-    superng6/qbittorrentee:latest
+    superng6/qbittorrentee:latest-s6v3
 ````
 
 ### docker-compose
@@ -169,7 +169,7 @@ docker create  \
 version: "3"
 services:
   qbittorrentee:
-    image: superng6/qbittorrentee
+    image: superng6/qbittorrentee:latest-s6v3
     container_name: qbittorrentee
     environment:
       - PUID=1026
